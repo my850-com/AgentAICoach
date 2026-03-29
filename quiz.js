@@ -623,12 +623,7 @@
         // Get form data
         const formData = new FormData(elements.captureForm);
         const leadData = {
-            firstName: formData.get('firstName'),
-            lastName: formData.get('lastName'),
             email: formData.get('email'),
-            company: formData.get('company') || '',
-            role: formData.get('role'),
-            phone: formData.get('phone') || '',
             timestamp: new Date().toISOString(),
             pageUrl: window.location.href,
             ...quizState.utmParams
