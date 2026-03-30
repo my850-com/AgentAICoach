@@ -82,6 +82,18 @@ function handleQuizSubmission(data) {
   
   const leadData = data.leadData;
   const answers = data.answers || {};
+  
+  // Get answer text if provided (new format), otherwise just display score
+  function getAnswerDisplay(answerData) {
+    if (!answerData) return '';
+    // If new format with text: {score: 5, text: "Daily workflow"}
+    if (typeof answerData === 'object' && answerData.text) {
+      return `${answerData.score} - ${answerData.text}`;
+    }
+    // Old format: just number
+    return answerData;
+  }
+  
   const row = [
     leadData.timestamp || new Date().toISOString(),
     'Quiz',
@@ -90,11 +102,11 @@ function handleQuizSubmission(data) {
     leadData.email,
     data.totalScore,
     data.category || '',
-    // Q1-Q20 (0-5 each)
-    answers[1] || 0, answers[2] || 0, answers[3] || 0, answers[4] || 0, answers[5] || 0,
-    answers[6] || 0, answers[7] || 0, answers[8] || 0, answers[9] || 0, answers[10] || 0,
-    answers[11] || 0, answers[12] || 0, answers[13] || 0, answers[14] || 0, answers[15] || 0,
-    answers[16] || 0, answers[17] || 0, answers[18] || 0, answers[19] || 0, answers[20] || 0,
+    // Q1-Q20 (display as "Score - Answer Text")
+    getAnswerDisplay(answers[1]), getAnswerDisplay(answers[2]), getAnswerDisplay(answers[3]), getAnswerDisplay(answers[4]), getAnswerDisplay(answers[5]),
+    getAnswerDisplay(answers[6]), getAnswerDisplay(answers[7]), getAnswerDisplay(answers[8]), getAnswerDisplay(answers[9]), getAnswerDisplay(answers[10]),
+    getAnswerDisplay(answers[11]), getAnswerDisplay(answers[12]), getAnswerDisplay(answers[13]), getAnswerDisplay(answers[14]), getAnswerDisplay(answers[15]),
+    getAnswerDisplay(answers[16]), getAnswerDisplay(answers[17]), getAnswerDisplay(answers[18]), getAnswerDisplay(answers[19]), getAnswerDisplay(answers[20]),
     leadData.utm_source || '',
     leadData.utm_medium || '',
     leadData.utm_campaign || '',
