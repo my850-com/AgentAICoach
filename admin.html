@@ -20,6 +20,98 @@
             padding: 40px 20px;
         }
         
+        /* Password Gate */
+        .password-gate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #1a365d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        
+        .password-gate.hidden {
+            display: none;
+        }
+        
+        .password-box {
+            background: white;
+            padding: 48px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        .password-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+        
+        .password-box h2 {
+            color: #1a365d;
+            margin-bottom: 8px;
+            font-size: 1.5rem;
+        }
+        
+        .password-box p {
+            color: #64748b;
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+        }
+        
+        .password-input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            text-align: center;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            transition: border-color 0.2s;
+        }
+        
+        .password-input:focus {
+            outline: none;
+            border-color: #1a365d;
+        }
+        
+        .password-error {
+            color: #ef4444;
+            font-size: 0.85rem;
+            margin-top: -8px;
+            margin-bottom: 12px;
+            display: none;
+        }
+        
+        .password-error.visible {
+            display: block;
+        }
+        
+        .password-btn {
+            width: 100%;
+            padding: 14px;
+            background: #1a365d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .password-btn:hover {
+            background: #0f172a;
+        }
+        
         .admin-container {
             max-width: 700px;
             margin: 0 auto;
@@ -237,6 +329,18 @@
     </style>
 </head>
 <body>
+    <!-- Password Gate -->
+    <div id="password-gate" class="password-gate">
+        <div class="password-box">
+            <div class="password-icon">🔒</div>
+            <h2>Team Access Required</h2>
+            <p>Enter the team password to access The Lab admin.</p>
+            <input type="password" id="password-input" class="password-input" placeholder="••••••••">
+            <p id="password-error" class="password-error">Incorrect password. Try again.</p>
+            <button id="password-btn" class="password-btn">Enter</button>
+        </div>
+    </div>
+
     <div class="admin-container">
         <header class="admin-header">
             <h1>🧪 The Lab Admin</h1>
@@ -489,6 +593,43 @@
             div.textContent = text;
             return div.innerHTML;
         }
+        
+        // Password gate functionality
+        const PASSWORD = 'Sherlock';
+        const gate = document.getElementById('password-gate');
+        const passwordInput = document.getElementById('password-input');
+        const passwordBtn = document.getElementById('password-btn');
+        const passwordError = document.getElementById('password-error');
+        
+        // Check if already unlocked (session)
+        if (sessionStorage.getItem('labAdminUnlocked') === 'true') {
+            gate.classList.add('hidden');
+        }
+        
+        function checkPassword() {
+            if (passwordInput.value === PASSWORD) {
+                sessionStorage.setItem('labAdminUnlocked', 'true');
+                gate.classList.add('hidden');
+            } else {
+                passwordError.classList.add('visible');
+                passwordInput.value = '';
+                passwordInput.focus();
+                setTimeout(() => {
+                    passwordError.classList.remove('visible');
+                }, 3000);
+            }
+        }
+        
+        passwordBtn.addEventListener('click', checkPassword);
+        
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+        
+        // Focus input on load
+        passwordInput.focus();
     </script>
 </body>
 </html>
