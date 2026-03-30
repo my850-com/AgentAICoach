@@ -506,7 +506,7 @@
     function selectAnswer(optionElement) {
         const question = allQuestions[quizState.currentQuestion];
         const score = parseInt(optionElement.dataset.score);
-        const answerText = optionElement.querySelector('.answer-text').textContent;
+        const answerText = optionElement.querySelector('span').textContent;
         
         // Update visual selection
         elements.questionContainer.querySelectorAll('.answer-option').forEach(opt => {
@@ -535,13 +535,16 @@
         const question = allQuestions[quizState.currentQuestion];
         
         // Validate answer is selected
-        if (!quizState.answers[question.id]) {
+        const currentAnswer = quizState.answers[question.id];
+        if (!currentAnswer || currentAnswer.score === undefined) {
             // Shake animation to indicate error
             const answersDiv = elements.questionContainer.querySelector('.answers');
-            answersDiv.style.animation = 'shake 0.5s ease';
-            setTimeout(() => {
-                answersDiv.style.animation = '';
-            }, 500);
+            if (answersDiv) {
+                answersDiv.style.animation = 'shake 0.5s ease';
+                setTimeout(() => {
+                    answersDiv.style.animation = '';
+                }, 500);
+            }
             return;
         }
         
