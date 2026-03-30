@@ -506,6 +506,7 @@
     function selectAnswer(optionElement) {
         const question = allQuestions[quizState.currentQuestion];
         const score = parseInt(optionElement.dataset.score);
+        const answerText = optionElement.querySelector('.answer-text').textContent;
         
         // Update visual selection
         elements.questionContainer.querySelectorAll('.answer-option').forEach(opt => {
@@ -513,8 +514,11 @@
         });
         optionElement.classList.add('selected');
         
-        // Store answer
-        quizState.answers[question.id] = score;
+        // Store answer (score + text)
+        quizState.answers[question.id] = {
+            score: score,
+            text: answerText
+        };
         
         // Auto-advance after short delay for better UX
         setTimeout(() => {
@@ -629,8 +633,8 @@
             ...quizState.utmParams
         };
         
-        // Calculate score
-        quizState.totalScore = Object.values(quizState.answers).reduce((sum, score) => sum + score, 0);
+        // Calculate score from answer objects
+        quizState.totalScore = Object.values(quizState.answers).reduce((sum, answer) => sum + answer.score, 0);
         
         // Show loading state
         const submitBtn = elements.captureForm.querySelector('button[type="submit"]');
@@ -662,9 +666,18 @@
             return Promise.resolve();
         }
         
+        // Build answer texts for readable display
+        const answerTexts = {};
+        for (let i = 1; i <= 20; i++) {
+            if (answers[i] && answers[i].text) {
+                answerTexts[i] = answers[i].text;
+            }
+        }
+        
         const payload = {
             leadData: leadData,
             answers: answers,
+            answerTexts: answerTexts,
             totalScore: totalScore,
             category: getScoreCategory(totalScore).name
         };
