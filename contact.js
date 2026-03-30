@@ -13,7 +13,7 @@
     
     // Google Apps Script Web App URL for contact form
     // Replace with your actual script URL after deploying
-    const CONTACT_FORM_URL = 'https://script.google.com/macros/s/YOUR_CONTACT_SCRIPT_ID/exec';
+    const CONTACT_FORM_URL = 'https://script.google.com/macros/s/AKfycbwGCC8V_KBncAGhIx_MRdKjm-jLbSskayCBR50Os84BYnAD6IxBJBP74q-qcT7MqY3L/exec';
 
     // ============================================
     // DOM ELEMENTS

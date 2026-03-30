@@ -350,7 +350,7 @@
     // Update this URL with your deployed Apps Script web app URL
     // ============================================
     
-    const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+    const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwGCC8V_KBncAGhIx_MRdKjm-jLbSskayCBR50Os84BYnAD6IxBJBP74q-qcT7MqY3L/exec';
     // ^^^ REPLACE THIS WITH YOUR ACTUAL GOOGLE APPS SCRIPT URL AFTER DEPLOYMENT
 
     // ============================================
