@@ -141,6 +141,239 @@
                 </div>
             </article>
 
+            <!-- Entry: March 31, 2026 -->
+            <article class="lab-entry featured">
+                <div class="entry-header">
+                    <time class="entry-date" datetime="2026-03-31">
+                        <span class="date-day">31</span>
+                        <span class="date-month">Mar</span>
+                        <span class="date-year">2026</span>
+                    </time>
+                    <div class="entry-title-wrap">
+                        <h2 class="entry-title">DIY Daily Planning Assistant: Email + Calendar Summaries</h2>
+                        <span class="entry-category">Automation</span>
+                        <span class="entry-badge">Tutorial</span>
+                    </div>
+                </div>
+                
+                <div class="entry-body">
+                    <div class="entry-summary">
+                        <p>A step-by-step guide to building your own morning and afternoon briefing system. Get automated summaries of overnight emails and today's calendar delivered to your phone—for free, using only no-code tools.</p>
+                    </div>
+                    
+                    <div class="entry-details">
+                        <h3>What You'll Build</h3>
+                        <p>Every day at 7am and 4pm, you'll receive a Telegram message with:</p>
+                        <ul>
+                            <li>📅 Count and list of today's appointments</li>
+                            <li>📧 Number of new emails since last check</li>
+                            <li>⚠️ Emails flagged as urgent (inspection, contract, etc.)</li>
+                        </ul>
+                        
+                        <h3>What You Need (All Free)</h3>
+                        <div class="entry-tools">
+                            <h4>Tools Used</h4>
+                            <ul class="tools-list">
+                                <li>n8n (self-hosted on Railway, ~$5/mo or free tier)</li>
+                                <li>Google Gmail API (free)</li>
+                                <li>Google Calendar API (free)</li>
+                                <li>Telegram Bot (free)</li>
+                            </ul>
+                        </div>
+                        
+                        <h3>Step-by-Step Build Instructions</h3>
+                        
+                        <div class="tutorial-section">
+                            <h4>Step 1: Deploy n8n (15 minutes)</h4>
+                            <ol>
+                                <li>Create account at <a href="https://railway.app" target="_blank">railway.app</a></li>
+                                <li>Click "New Project" → "Deploy n8n"</li>
+                                <li>Wait 2 minutes for deployment</li>
+                                <li>Click the URL Railway gives you</li>
+                                <li>Create your n8n admin account</li>
+                            </ol>
+                            <p><strong>Cost:</strong> ~$5/month after trial (or use Railway's free tier)</p>
+                        </div>
+                        
+                        <div class="tutorial-section">
+                            <h4>Step 2: Create Telegram Bot (5 minutes)</h4>
+                            <ol>
+                                <li>Open Telegram, search for <strong>@BotFather</strong></li>
+                                <li>Send: <code>/newbot</code></li>
+                                <li>Follow prompts: name your bot (e.g., "My Daily Brief")</li>
+                                <li><strong>Save the API token</strong> BotFather gives you</li>
+                                <li>Send a message to your new bot to start it</li>
+                                <li>Find your chat ID: Visit <code>https://api.telegram.org/bot[YOUR_TOKEN]/getUpdates</code></li>
+                            </ol>
+                            <p><strong>Save these:</strong> Bot Token + Chat ID</p>
+                        </div>
+                        
+                        <div class="tutorial-section">
+                            <h4>Step 3: Connect Gmail & Calendar (10 minutes)</h4>
+                            <ol>
+                                <li>In n8n, click "Credentials" → "New"</li>
+                                <li>Add "Google OAuth2 API" credential</li>
+                                <li>Go to <a href="https://console.cloud.google.com" target="_blank">Google Cloud Console</a></li>
+                                <li>Create project → Enable Gmail API + Calendar API</li>
+                                <li>Create OAuth credentials (Web application)</li>
+                                <li>Add authorized redirect: <code>https://[YOUR-N8N-URL]/rest/oauth2-credential/callback</code></li>
+                                <li>Copy Client ID and Secret to n8n</li>
+                                <li>Click "Connect" in n8n and authorize with your Google account</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="tutorial-section">
+                            <h4>Step 4: Build the Workflow (20 minutes)</h4>
+                            <p>In n8n, create a new workflow with these nodes:</p>
+                            
+                            <div class="workflow-nodes">
+                                <h5>Node 1: Schedule Trigger (7am daily)</h5>
+                                <ul>
+                                    <li>Type: Schedule Trigger</li>
+                                    <li>Mode: Every Day</li>
+                                    <li>Time: 07:00</li>
+                                </ul>
+                                
+                                <h5>Node 2: Get Calendar Events</h5>
+                                <ul>
+                                    <li>Type: Google Calendar → Get Many Events</li>
+                                    <li>Calendar: Your primary calendar</li>
+                                    <li>Start Time: <code>{{$now}}</code></li>
+                                    <li>End Time: <code>{{$now.plus(1, 'day')}}</code></li>
+                                </ul>
+                                
+                                <h5>Node 3: Get Emails</h5>
+                                <ul>
+                                    <li>Type: Gmail → Get Many Messages</li>
+                                    <li>Search Query: <code>newer_than:12h</code></li>
+                                    <li>Max Results: 50</li>
+                                </ul>
+                                
+                                <h5>Node 4: Format Message</h5>
+                                <ul>
+                                    <li>Type: Code (JavaScript)</li>
+                                    <li>Paste this code:</li>
+                                </ul>
+                                <pre><code>// Count events and emails
+const events = $input.all()[0].json.length;
+const emails = $input.all()[1].json.length;
+
+// Check for urgent keywords
+const urgentEmails = $input.all()[1].json.filter(msg => {
+  const subject = msg.subject || '';
+  return subject.toLowerCase().includes('urgent') || 
+         subject.toLowerCase().includes('inspection') ||
+         subject.toLowerCase().includes('contract') ||
+         subject.toLowerCase().includes('asap');
+});
+
+const urgentCount = urgentEmails.length;
+
+// Get today's events list
+const eventList = $input.all()[0].json.slice(0, 5).map(e => {
+  const time = new Date(e.start).toLocaleTimeString('en-US', {
+    hour: 'numeric', minute: '2-digit'
+  });
+  return `${time}: ${e.summary}`;
+}).join('\n');
+
+return [{
+  json: {
+    text: `📅 Good Morning!\n\nToday's Appointments: ${events}\n${eventList || 'No events today'}\n\n📧 Overnight Emails: ${emails}\n⚠️ Urgent: ${urgentCount}`
+  }
+}];
+</code></pre>
+                                
+                                <h5>Node 5: Send Telegram Message</h5>
+                                <ul>
+                                    <li>Type: Telegram → Send Message</li>
+                                    <li>Credential: Your Telegram bot</li>
+                                    <li>Chat ID: Your chat ID</li>
+                                    <li>Text: <code>{{$json.text}}</code></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="tutorial-section">
+                            <h4>Step 5: Test & Activate (5 minutes)</h4>
+                            <ol>
+                                <li>Click "Test Workflow" - you should get a Telegram message immediately</li>
+                                <li>If it works, click "Save" then "Activate"</li>
+                                <li>Duplicate this workflow</li>
+                                <li>Change trigger to 16:00 (4pm)</li>
+                                <li>Change email query to <code>newer_than:9h</code> (since 7am)</li>
+                                <li>Save and activate second workflow</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="entry-learned">
+                            <h4>Expected Results</h4>
+                            <p>Each morning and afternoon, you'll receive a message like:</p>
+                            <blockquote>
+                                📅 Good Morning!<br><br>
+                                Today's Appointments: 3<br>
+                                10:00 AM: Listing Walkthrough<br>
+                                2:00 PM: Buyer Consultation<br>
+                                4:30 PM: Closing Docs<br><br>
+                                📧 Overnight Emails: 4<br>
+                                ⚠️ Urgent: 1
+                            </blockquote>
+                        </div>
+                    </div>
+                    
+                    <div class="entry-footer">
+                        <div class="entry-status">
+                            <span class="status-badge status-building">Build It Yourself</span>
+                        </div>
+                        <div class="entry-links">
+                            <a href="https://docs.n8n.io/integrations/builtin/credentials/google/" class="entry-link" target="_blank">
+                                n8n Google Setup Docs →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+                
+                <div class="entry-body">
+                    <div class="entry-summary">
+                        <p>Used Replit's AI-powered development environment to rapidly prototype a customizable "Agent Hub" CRM specifically designed for real estate team workflows. The AI-assisted coding experience dramatically accelerated build time, though large-scale projects require careful backend token management. This proof-of-concept demonstrates how AI-native IDEs can serve as powerful tools for rapid real estate tech prototyping.</p>
+                    </div>
+                    
+                    <div class="entry-details">
+                        <h3>The Problem</h3>
+                        <p>Real estate teams need CRMs that match their unique workflows — generic solutions force teams to adapt rather than the software adapting to them. We wanted to test whether AI-assisted development could deliver a custom team management platform in hours, not months.</p>
+                        
+                        <h3>The Solution</h3>
+                        <p>Built a fully functional Agent Hub CRM using Replit's AI assistant. The platform supports team member management, activity tracking, and role-based access controls tailored for real estate operations.</p>
+                        
+                        <div class="entry-tools">
+                            <h4>Tools Used</h4>
+                            <ul class="tools-list">
+                                <li>Replit.ai IDE with AI assistant</li>
+                                <li>Custom CRM architecture</li>
+                                <li>Real-time collaboration features</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="entry-learned">
+                            <h4>Key Insight</h4>
+                            <p>While Replit's build costs are minimal on the frontend, backend token consumption scales quickly on complex projects. The smart approach: build in transferable languages (JavaScript, Python) so you can migrate to GitHub or self-hosted infrastructure once validated. This gives you AI-speed development without vendor lock-in.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="entry-footer">
+                        <div class="entry-status">
+                            <span class="status-badge status-deployed">Deployed</span>
+                        </div>
+                        <div class="entry-links">
+                            <a href="https://agent-hub--floridahotdeals.replit.app/" class="entry-link" target="_blank" rel="noopener noreferrer">
+                                View Live Demo →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
             <!-- Entry: March 29, 2026 -->
             <article class="lab-entry">
                 <div class="entry-header">
