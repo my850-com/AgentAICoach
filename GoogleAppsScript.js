@@ -1,24 +1,18 @@
 /**
  * Google Apps Script for AgentAICoach Form Submissions
  * 
- * This script receives webhook data from the quiz and contact forms
- * and writes it to the "Sherlock Data" Google Sheet.
+ * This script receives webhook data from both quiz and contact forms
+ * and writes them to the "AI Coach Form Submissions" sheet.
+ * 
+ * FPL Form Submissions remains untouched for existing forms.
  * 
  * Setup Instructions:
- * 1. Open your "Sherlock Data" Google Sheet
+ * 1. Open your "Sherlock Data" Google Sheet  
  * 2. Extensions → Apps Script
- * 3. Paste this entire code into the script editor
+ * 3. Delete existing code and paste this entire script
  * 4. Save and deploy as Web App (see below)
- * 5. The script will auto-create sheets on first use
- * 
- * MANUAL SHEET CREATION (optional):
- * If you want to create sheets manually before first submission:
- * 
- * Sheet 1: "QuizSubmissions"
- * Headers: Timestamp | Email | Total Score | Category | Q1 | Q2 | ... | Q20 | UTM Source | UTM Medium | UTM Campaign | Page URL
- * 
- * Sheet 2: "ContactSubmissions"  
- * Headers: Timestamp | First Name | Last Name | Email | Phone | Interest | Role | Message | Page URL
+ * 5. The script will auto-create headers on first submission
+ * 6. Update quiz.js and contact.js with the deployed URL
  * 
  * Deployment:
  * 1. Click Deploy → New deployment
@@ -26,35 +20,31 @@
  * 3. Execute as: Me
  * 4. Who has access: Anyone
  * 5. Click Deploy
- * 6. Copy the Web App URL (looks like: https://script.google.com/macros/s/ABC123/exec)
+ * 6. Copy the Web App URL
  * 7. Update quiz.js and contact.js with this URL
  */
 
 // ============================================
-// DO NOT EDIT BELOW UNLESS YOU KNOW WHAT YOU'RE DOING
+// MAIN HANDLER
 // ============================================
 
 function doPost(e) {
   try {
-    // Parse the incoming JSON data
     const data = JSON.parse(e.postData.contents);
     
-    // Determine which form submitted (quiz vs contact)
+    // Determine submission type
     if (data.leadData && data.answers && typeof data.totalScore !== 'undefined') {
-      // This is a quiz submission
       return handleQuizSubmission(data);
     } else if (data.source === 'contact-form') {
-      // This is a contact form submission
       return handleContactSubmission(data);
     } else {
-      // Unknown submission type
       return jsonResponse({
         success: false,
-        error: 'Unknown submission type. Expected quiz or contact form data.'
+        error: 'Unknown submission type'
       });
     }
   } catch (error) {
-    console.error('Error processing submission:', error);
+    console.error('Error:', error);
     return jsonResponse({
       success: false,
       error: error.toString()
@@ -63,11 +53,10 @@ function doPost(e) {
 }
 
 function doGet(e) {
-  // For testing - returns a simple success message
-  return ContentService.createTextOutput(JSON.stringify({
+  return jsonResponse({
     status: 'OK',
     message: 'AgentAICoach form endpoint is running'
-  })).setMimeType(ContentService.MimeType.JSON);
+  });
 }
 
 // ============================================
@@ -75,70 +64,52 @@ function doGet(e) {
 // ============================================
 
 function handleQuizSubmission(data) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const SHEET_NAME = 'AI Coach Form Submissions';
+  let sheet = ss.getSheetByName(SHEET_NAME);
+  
+  // Create sheet if doesn't exist
+  if (!sheet) {
+    sheet = ss.insertSheet(SHEET_NAME);
+    setupHeaders(sheet);
+  }
+  
+  // Check if we need quiz headers
+  const existingHeaders = sheet.getRange(1, 1, 1, 32).getValues()[0];
+  if (!existingHeaders[0]) {
+    setupHeaders(sheet);
+  }
+  
   const leadData = data.leadData;
   const answers = data.answers || {};
-  const totalScore = data.totalScore;
-  const category = data.category || 'Unknown';
-  
-  // Get or create the QuizSubmissions sheet
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  let sheet = ss.getSheetByName('QuizSubmissions');
-  
-  if (!sheet) {
-    // Create sheet with headers if it doesn't exist
-    sheet = ss.insertSheet('QuizSubmissions');
-    const headers = [
-      'Timestamp',
-      'Email',
-      'Total Score',
-      'Category',
-      'Q1', 'Q2', 'Q3', 'Q4', 'Q5',
-      'Q6', 'Q7', 'Q8', 'Q9', 'Q10',
-      'Q11', 'Q12', 'Q13', 'Q14', 'Q15',
-      'Q16', 'Q17', 'Q18', 'Q19', 'Q20',
-      'UTM Source',
-      'UTM Medium',
-      'UTM Campaign',
-      'Page URL'
-    ];
-    sheet.appendRow(headers);
-    
-    // Format header row
-    const headerRange = sheet.getRange(1, 1, 1, headers.length);
-    headerRange.setFontWeight('bold');
-    headerRange.setBackground('#1a365d');
-    headerRange.setFontColor('#ffffff');
-  }
-  
-  // Build the row data
   const row = [
     leadData.timestamp || new Date().toISOString(),
+    'Quiz',
+    '', // First Name
+    '', // Last Name
     leadData.email,
-    totalScore,
-    category
-  ];
-  
-  // Add all 20 quiz answers (0 if not answered)
-  for (let i = 1; i <= 20; i++) {
-    row.push(answers[i] || 0);
-  }
-  
-  // Add UTM params and page URL
-  row.push(
+    data.totalScore,
+    data.category || '',
+    // Q1-Q20 (0-5 each)
+    answers[1] || 0, answers[2] || 0, answers[3] || 0, answers[4] || 0, answers[5] || 0,
+    answers[6] || 0, answers[7] || 0, answers[8] || 0, answers[9] || 0, answers[10] || 0,
+    answers[11] || 0, answers[12] || 0, answers[13] || 0, answers[14] || 0, answers[15] || 0,
+    answers[16] || 0, answers[17] || 0, answers[18] || 0, answers[19] || 0, answers[20] || 0,
     leadData.utm_source || '',
     leadData.utm_medium || '',
     leadData.utm_campaign || '',
+    '', // Interest
+    '', // Message
     leadData.pageUrl || ''
-  );
+  ];
   
-  // Append to sheet
   sheet.appendRow(row);
   
   return jsonResponse({
     success: true,
-    message: 'Quiz submission recorded',
-    score: totalScore,
-    category: category
+    message: 'Quiz recorded',
+    score: data.totalScore,
+    category: data.category
   });
 }
 
@@ -147,57 +118,83 @@ function handleQuizSubmission(data) {
 // ============================================
 
 function handleContactSubmission(data) {
-  // Get or create the ContactSubmissions sheet
   const ss = SpreadsheetApp.getActiveSpreadsheet();
-  let sheet = ss.getSheetByName('ContactSubmissions');
+  const SHEET_NAME = 'AI Coach Form Submissions';
+  let sheet = ss.getSheetByName(SHEET_NAME);
   
   if (!sheet) {
-    // Create sheet with headers if it doesn't exist
-    sheet = ss.insertSheet('ContactSubmissions');
-    const headers = [
-      'Timestamp',
-      'First Name',
-      'Last Name',
-      'Email',
-      'Phone',
-      'Interest',
-      'Role',
-      'Message',
-      'Page URL'
-    ];
-    sheet.appendRow(headers);
-    
-    // Format header row
-    const headerRange = sheet.getRange(1, 1, 1, headers.length);
-    headerRange.setFontWeight('bold');
-    headerRange.setBackground('#1a365d');
-    headerRange.setFontColor('#ffffff');
+    sheet = ss.insertSheet(SHEET_NAME);
+    setupHeaders(sheet);
   }
   
-  // Build the row data
+  // Check if we need headers
+  const existingHeaders = sheet.getRange(1, 1, 1, 32).getValues()[0];
+  if (!existingHeaders[0]) {
+    setupHeaders(sheet);
+  }
+  
   const row = [
     data.timestamp || new Date().toISOString(),
-    data.firstName,
-    data.lastName,
+    'Contact',
+    data.firstName || '',
+    data.lastName || '',
     data.email,
-    data.phone || '',
-    data.interest,
-    data.role || '',
-    data.message,
+    '', // Score
+    '', // Category
+    // Q1-Q20 (blank for contact forms)
+    '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
+    '', // UTM Source
+    '', // UTM Medium  
+    '', // UTM Campaign
+    data.interest || '',
+    data.message || '',
     data.pageUrl || ''
   ];
   
-  // Append to sheet
   sheet.appendRow(row);
   
   return jsonResponse({
     success: true,
-    message: 'Contact form submission recorded'
+    message: 'Contact recorded'
   });
 }
 
 // ============================================
-// UTILITY FUNCTIONS
+// SHEET SETUP
+// ============================================
+
+function setupHeaders(sheet) {
+  const headers = [
+    'Timestamp',
+    'Source',
+    'FirstName',
+    'LastName', 
+    'Email',
+    'Score',
+    'Category',
+    'Q1', 'Q2', 'Q3', 'Q4', 'Q5',
+    'Q6', 'Q7', 'Q8', 'Q9', 'Q10',
+    'Q11', 'Q12', 'Q13', 'Q14', 'Q15',
+    'Q16', 'Q17', 'Q18', 'Q19', 'Q20',
+    'UTM_Source',
+    'UTM_Medium',
+    'UTM_Campaign',
+    'Interest',
+    'Message',
+    'Page_URL'
+  ];
+  
+  sheet.appendRow(headers);
+  
+  // Format header row
+  const headerRange = sheet.getRange(1, 1, 1, headers.length);
+  headerRange.setFontWeight('bold');
+  headerRange.setBackground('#1a365d');
+  headerRange.setFontColor('#ffffff');
+}
+
+// ============================================
+// UTILITIES
 // ============================================
 
 function jsonResponse(data) {
@@ -205,45 +202,39 @@ function jsonResponse(data) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-// Test function (run this manually in Apps Script editor to verify)
-function testQuizSubmission() {
+// Test functions (run manually in Apps Script editor)
+function testQuiz() {
   const testData = {
     leadData: {
       email: 'test@example.com',
       timestamp: new Date().toISOString(),
       pageUrl: 'https://agentaicoach.com/',
-      utm_source: 'test',
-      utm_medium: 'test',
-      utm_campaign: 'test'
+      utm_source: 'google',
+      utm_medium: 'organic'
     },
-    answers: {
-      1: 5, 2: 4, 3: 3, 4: 2, 5: 1,
-      6: 5, 7: 4, 8: 3, 9: 2, 10: 1,
-      11: 5, 12: 4, 13: 3, 14: 2, 15: 1,
-      16: 5, 17: 4, 18: 3, 19: 2, 20: 1
-    },
-    totalScore: 50,
-    category: 'AI Emerging'
+    answers: { 1: 5, 2: 4, 3: 3, 4: 4, 5: 5 },
+    totalScore: 65,
+    category: 'AI Active User'
   };
   
   const result = handleQuizSubmission(testData);
-  console.log('Quiz test result:', result);
+  console.log('Quiz result:', result.getContent());
 }
 
-function testContactSubmission() {
+function testContact() {
   const testData = {
     timestamp: new Date().toISOString(),
-    firstName: 'Test',
-    lastName: 'User',
-    email: 'test@example.com',
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'john@example.com',
     phone: '(555) 123-4567',
     interest: 'coaching',
     role: 'agent',
-    message: 'This is a test message from the contact form.',
+    message: 'Interested in private coaching for my team.',
     pageUrl: 'https://agentaicoach.com/contact.html',
     source: 'contact-form'
   };
   
   const result = handleContactSubmission(testData);
-  console.log('Contact test result:', result);
+  console.log('Contact result:', result.getContent());
 }
