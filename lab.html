@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Lab - Daily updates on what AI we're building for real estate professionals.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="The Lab - AgentAICoach">
+    <meta property="og:description" content="Daily AI experiments and implementations for real estate.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    
+    <title>The Lab - AgentAICoach</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='15' fill='%231a365d'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='42' font-weight='bold' fill='white'%3EAI%3C/text%3E%3C/svg%3E">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="lab.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-brand">
+                <span class="brand-icon">🤖</span>
+                <span class="brand-text">AgentAICoach</span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links">
+                <a href="index.html#services">Services</a>
+                <a href="lab.html" class="active">The Lab</a>
+                <a href="index.html#quiz">Take the Quiz</a>
+                <a href="contact.html" class="btn btn-outline">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Lab Header -->
+    <section class="lab-header">
+        <div class="container">
+            <div class="lab-header-content">
+                <span class="lab-badge">🔬</span>
+                <h1>The Lab</h1>
+                <p class="lab-tagline">
+                    What we're building, testing, and breaking <br>
+                    <span class="highlight">Real AI experiments. Real results. Daily.</span>
+                </p>
+                <div class="lab-meta">
+                    <span class="lab-activity">
+                        <span class="pulse"></span>
+                        Currently Building
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lab Feed -->
+    <section class="lab-feed">
+        <div class="container">
+            
+            <!-- Entry: March 29, 2026 -->
+            <article class="lab-entry">
+                <div class="entry-header">
+                    <time class="entry-date" datetime="2026-03-29">
+                        <span class="date-day">29</span>
+                        <span class="date-month">Mar</span>
+                        <span class="date-year">2026</span>
+                    </time>
+                    <div class="entry-title-wrap">
+                        <h2 class="entry-title">AgentAICoach Quiz Integration Pipeline</h2>
+                        <span class="entry-category">Backend Infrastructure</span>
+                    </div>
+                </div>
+                
+                <div class="entry-body">
+                    <div class="entry-summary">
+                        <p>Connected the quiz and contact forms to Google Sheets for real-time lead capture. The challenge: avoiding conflicts with existing FPL Form Submissions data while capturing 20 quiz answers per user plus scoring.</p>
+                    </div>
+                    
+                    <div class="entry-details">
+                        <h3>The Problem</h3>
+                        <p>Forms were submitting but data was going nowhere. Needed a unified destination for both quiz and contact submissions without breaking existing FPL form integration.</p>
+                        
+                        <h3>The Solution</h3>
+                        <p>Built a Google Apps Script web app handling both submission types. Unified structure with 32 columns: Source (Quiz/Contact), email, score (0-100), category, Q1-Q20 answers, plus UTM tracking. Auto-creates "AI Coach Form Submissions" sheet on first submission.</p>
+                        
+                        <div class="entry-tools">
+                            <h4>Tools Used</h4>
+                            <ul class="tools-list">
+                                <li>Google Apps Script</li>
+                                <li>CORS-enabled fetch API</li>
+                                <li>32-column structured sheet</li>
+                                <li>GitHub Pages deployment</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="entry-footer">
+                        <div class="entry-status">
+                            <span class="status-badge status-building">Building</span>
+                            <span class="status-note">Testing in progress</span>
+                        </div>
+                        <div class="entry-links">
+                            <a href="https://agentaicoach.com" class="entry-link" target="_blank">
+                                View Live Site →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Entry: March 28, 2026 (Example) -->
+            <article class="lab-entry">
+                <div class="entry-header">
+                    <time class="entry-date" datetime="2026-03-28">
+                        <span class="date-day">28</span>
+                        <span class="date-month">Mar</span>
+                        <span class="date-year">2026</span>
+                    </time>
+                    <div class="entry-title-wrap">
+                        <h2 class="entry-title">Lis Pendens Lead Scoring Algorithm</h2>
+                        <span class="entry-category">Machine Learning</span>
+                    </div>
+                </div>
+                
+                <div class="entry-body">
+                    <div class="entry-summary">
+                        <p>Built a scoring system to rank Lis Pendens leads by likelihood to sell. Analyzing 6 months of data to identify patterns in filing-to-sale timelines.</p>
+                    </div>
+                    
+                    <div class="entry-details">
+                        <h3>What We Learned</h3>
+                        <p>Properties with multiple liens are 4.3x more likely to sell within 90 days. County matters less than we thought — financial distress is the key signal.</p>
+                        
+                        <div class="entry-tools">
+                            <h4>Tools Used</h4>
+                            <ul class="tools-list">
+                                <li>Python + Pandas</li>
+                                <li>Google Sheets API</li>
+                                <li>Statistical analysis</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="entry-footer">
+                        <div class="entry-status">
+                            <span class="status-badge status-testing">Testing</span>
+                            <span class="status-note">Validation on March data</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Entry: March 27, 2026 (Example) -->
+            <article class="lab-entry">
+                <div class="entry-header">
+                    <time class="entry-date" datetime="2026-03-27">
+                        <span class="date-day">27</span>
+                        <span class="date-month">Mar</span>
+                        <span class="date-year">2026</span>
+                    </time>
+                    <div class="entry-title-wrap">
+                        <h2 class="entry-title">Automated MLS Photo Analysis</h2>
+                        <span class="entry-category">Computer Vision</span>
+                    </div>
+                </div>
+                
+                <div class="entry-body">
+                    <div class="entry-summary">
+                        <p>Testing Claude's vision capabilities for analyzing MLS listing photos. Goal: auto-generate improvement suggestions that increase click-through rates.</p>
+                    </div>
+                    
+                    <div class="entry-details">
+                        <h3>Initial Results</h3>
+                        <p>AI successfully identified poor lighting in 78% of photos with <5% engagement. Suggested staging changes increased simulated CTR by 23% in test batch.</p>
+                        
+                        <div class="entry-tools">
+                            <h4>Tools Used</h4>
+                            <ul class="tools-list">
+                                <li>Anthropic Claude 3</li>
+                                <li>Python + PIL</li>
+                                <li>CTR simulation model</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="entry-footer">
+                        <div class="entry-status">
+                            <span class="status-badge status-idea">Idea</span>
+                            <span class="status-note">Proof of concept complete</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Archive Link -->
+            <div class="lab-archive">
+                <p>
+                    <span class="archive-icon">📁</span>
+                    <strong>Archive:</strong> 3 entries so far | Full history coming as we build
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscribe CTA -->
+    <section class="lab-subscribe">
+        <div class="container">
+            <div class="subscribe-content">
+                <h2>Get Lab Updates</h2>
+                <p>We build in public. Follow along as we experiment with AI for real estate.</p>
+                <div class="subscribe-options">
+                    <a href="mailto:my850@agentmail.to?subject=Subscribe to The Lab" class="btn btn-primary">
+                        Email Updates
+                    </a>
+                    <span class="subscribe-or">or</span>
+                    <a href="index.html#quiz" class="btn btn-outline">
+                        Take the Quiz
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="brand-link">
+                        <span class="brand-icon">🤖</span>
+                        <span class="brand-text">AgentAICoach</span>
+                    </a>
+                    <p>Teaching real estate professionals to fish in the AI era.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="index.html#services">DIY AI Course</a></li>
+                            <li><a href="index.html#services">Private Coaching</a></li>
+                            <li><a href="index.html#services">Done-For-You</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Lab</h4>
+                        <ul>
+                            <li><a href="lab.html">Latest Experiments</a></li>
+                            <li><a href="lab.html">Archive</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="mailto:my850@agentmail.to">my850@agentmail.to</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 AgentAICoach. Built in The Lab. 🧪</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
