@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact AgentAICoach for AI implementation support, private coaching, and custom AI systems for real estate professionals.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Contact - AgentAICoach">
+    <meta property="og:description" content="Get in touch with AgentAICoach for AI implementation support and custom solutions.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    
+    <title>Contact Us - AgentAICoach</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='15' fill='%231a365d'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='42' font-weight='bold' fill='white'%3EAI%3C/text%3E%3C/svg%3E">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-brand">
+                <span class="brand-icon">🤖</span>
+                <span class="brand-text">AgentAICoach</span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links">
+                <a href="index.html#services">Services</a>
+                <a href="index.html#quiz">Take the Quiz</a>
+                <a href="contact.html" class="btn btn-outline">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contact Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <span class="section-tag">Get In Touch</span>
+                <h1 class="page-title">Let's Talk AI</h1>
+                <p class="page-subtitle">
+                    Ready to implement AI in your real estate business? Have questions? Fill out the form below and we'll get back to you within 24 hours.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="contact-section" id="contact-form">
+        <div class="container">
+            <div class="contact-layout">
+                <!-- Form -->
+                <div class="contact-form-wrapper">
+                    <form id="contact-form" class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required placeholder="Your first name">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required placeholder="Your last name">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="you@example.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="interest">What are you interested in? *</label>
+                            <select id="interest" name="interest" required>
+                                <option value="">Select an option</option>
+                                <option value="quiz-results">I took the quiz and want to discuss my results</option>
+                                <option value="diy-course">DIY AI Course ($497)</option>
+                                <option value="coaching">Private Coaching ($2,497)</option>
+                                <option value="custom">Done-For-You AI System (Custom)</option>
+                                <option value="general">General Question</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="role">Your Role</label>
+                            <select id="role" name="role">
+                                <option value="">Select your role</option>
+                                <option value="agent">Real Estate Agent</option>
+                                <option value="broker">Broker / Team Leader</option>
+                                <option value="lender">Mortgage Lender</option>
+                                <option value="assistant">Assistant / Admin</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">How can we help? *</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Tell us about your situation, goals, or questions..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-large btn-full">
+                            <span>Send Message</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+                        
+                        <p class="form-privacy">
+                            🔒 Your information is secure. We never share or sell your data.
+                        </p>
+                    </form>
+                    
+                    <!-- Success Message -->
+                    <div id="form-success" class="form-success" style="display: none;">
+                        <div class="success-icon">✓</div>
+                        <h3>Message Sent!</h3>
+                        <p>Thanks for reaching out. We'll get back to you within 24 hours.</p>
+                        <a href="index.html" class="btn btn-outline">Back to Home</a>
+                    </div>
+                </div>
+
+                <!-- Contact Info Sidebar -->
+                <div class="contact-info">
+                    <div class="info-card">
+                        <div class="info-icon">📧</div>
+                        <h3>Email Us</h3>
+                        <p>hello@agentaicoach.com</p>
+                        <p class="info-note">We typically respond within 24 hours</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">⏰</div>
+                        <h3>Response Time</h3>
+                        <p><strong>Mon-Fri:</strong> Within 24 hours</p>
+                        <p><strong>Weekends:</strong> By Monday</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">🚀</div>
+                        <h3>Quick Start</h3>
+                        <p>Not sure where to begin?</p>
+                        <a href="index.html#quiz" class="btn btn-outline btn-small">Take the Quiz</a>
+                    </div>
+                    
+                    <div class="info-card social-card">
+                        <h3>Follow Us</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+                            <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+                            <a href="#" class="social-link" aria-label="YouTube">▶</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="contact-faq">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Common Questions</span>
+                <h2>Before You Reach Out</h2>
+            </div>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>What's the best way to get started?</summary>
+                    <p><a href="index.html#quiz">Take the AI Proficiency Quiz</a>. It's free, takes 3 minutes, and gives you a personalized recommendation based on your current AI readiness.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Do you offer free consultations?</summary>
+                    <p>Yes! After you take the quiz, you can book a free 15-minute consultation to discuss your results and recommended path.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Can I upgrade from DIY to Coaching later?</summary>
+                    <p>Absolutely. Many clients start with the DIY course and upgrade to coaching once they see the potential. Contact us for a credit toward your upgrade.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Do you work with teams or just individuals?</summary>
+                    <p>Both. We have solutions for solo agents, team leaders, and full brokerages. Our custom builds are particularly popular with teams.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="brand-link">
+                        <span class="brand-icon">🤖</span>
+                        <span class="brand-text">AgentAICoach</span>
+                    </a>
+                    <p>Teaching real estate professionals to fish in the AI era. We don't just give you tools. We teach you how to use them.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="index.html#services">DIY AI Course</a></li>
+                            <li><a href="index.html#services">Private Coaching</a></li>
+                            <li><a href="index.html#services">Done-For-You Systems</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="index.html#quiz">AI Proficiency Quiz</a></li>
+                            <li><a href="index.html#faq">FAQ</a></li>
+                            <li><a href="index.html#testimonials">Success Stories</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a href="contact.html">Get in Touch</a></li>
+                            <li><a href="mailto:hello@agentaicoach.com">hello@agentaicoach.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 AgentAICoach. All rights reserved.</p>
+                <p class="quote">"Give a man a fish, feed him for a day. Teach a man to fish, feed him for a lifetime."</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script src="contact.js"></script>
+</body>
+</html>
