@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="The Lab - AI experiments for real estate: Replit CRM builds, quiz pipelines, lead scoring, and computer vision tests. Follow our daily AI builds for agents and brokers.">
-    
+
     <!-- Open Graph -->
     <meta property="og:title" content="The Lab - AgentAICoach">
     <meta property="og:description" content="Daily AI experiments and implementations for real estate.">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary">
-    
+
     <title>The Lab - AgentAICoach</title>
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='15' fill='%231a365d'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='42' font-weight='bold' fill='white'%3EAI%3C/text%3E%3C/svg%3E">
-    
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="lab.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -86,7 +86,7 @@
     <!-- Lab Feed -->
     <section class="lab-feed">
         <div class="container">
-            
+
             <!-- Entry: March 30, 2026 -->
             <article class="lab-entry">
                 <div class="entry-header">
@@ -100,19 +100,19 @@
                         <span class="entry-category">Automation</span>
                     </div>
                 </div>
-                
+
                 <div class="entry-body">
                     <div class="entry-summary">
                         <p>Used Replit's AI-powered development environment to rapidly prototype a customizable "Agent Hub" CRM specifically designed for real estate team workflows. The AI-assisted coding experience dramatically accelerated build time, though large-scale projects require careful backend token management. This proof-of-concept demonstrates how AI-native IDEs can serve as powerful tools for rapid real estate tech prototyping.</p>
                     </div>
-                    
+
                     <div class="entry-details">
                         <h3>The Problem</h3>
                         <p>Real estate teams need CRMs that match their unique workflows — generic solutions force teams to adapt rather than the software adapting to them. We wanted to test whether AI-assisted development could deliver a custom team management platform in hours, not months.</p>
-                        
+
                         <h3>The Solution</h3>
                         <p>Built a fully functional Agent Hub CRM using Replit's AI assistant. The platform supports team member management, activity tracking, and role-based access controls tailored for real estate operations.</p>
-                        
+
                         <div class="entry-tools">
                             <h4>Tools Used</h4>
                             <ul class="tools-list">
@@ -121,13 +121,13 @@
                                 <li>Real-time collaboration features</li>
                             </ul>
                         </div>
-                        
+
                         <div class="entry-learned">
                             <h4>Key Insight</h4>
                             <p>While Replit's build costs are minimal on the frontend, backend token consumption scales quickly on complex projects. The smart approach: build in transferable languages (JavaScript, Python) so you can migrate to GitHub or self-hosted infrastructure once validated. This gives you AI-speed development without vendor lock-in.</p>
                         </div>
                     </div>
-                    
+
                     <div class="entry-footer">
                         <div class="entry-status">
                             <span class="status-badge status-deployed">Deployed</span>
@@ -155,12 +155,12 @@
                         <span class="entry-badge">Tutorial</span>
                     </div>
                 </div>
-                
+
                 <div class="entry-body">
                     <div class="entry-summary">
                         <p>A step-by-step guide to building your own morning and afternoon briefing system. Get automated summaries of overnight emails and today's calendar delivered to your phone—for free, using only no-code tools.</p>
                     </div>
-                    
+
                     <div class="entry-details">
                         <h3>What You'll Build</h3>
                         <p>Every day at 7am and 4pm, you'll receive a Telegram message with:</p>
@@ -169,7 +169,7 @@
                             <li>📧 Number of new emails since last check</li>
                             <li>⚠️ Emails flagged as urgent (inspection, contract, etc.)</li>
                         </ul>
-                        
+
                         <h3>What You Need (All Free)</h3>
                         <div class="entry-tools">
                             <h4>Tools Used</h4>
@@ -180,9 +180,9 @@
                                 <li>Telegram Bot (free)</li>
                             </ul>
                         </div>
-                        
+
                         <h3>Step-by-Step Build Instructions</h3>
-                        
+
                         <div class="tutorial-section">
                             <h4>Step 1: Deploy n8n (15 minutes)</h4>
                             <ol>
@@ -194,7 +194,7 @@
                             </ol>
                             <p><strong>Cost:</strong> ~$5/month after trial (or use Railway's free tier)</p>
                         </div>
-                        
+
                         <div class="tutorial-section">
                             <h4>Step 2: Create Telegram Bot (5 minutes)</h4>
                             <ol>
@@ -207,7 +207,7 @@
                             </ol>
                             <p><strong>Save these:</strong> Bot Token + Chat ID</p>
                         </div>
-                        
+
                         <div class="tutorial-section">
                             <h4>Step 3: Connect Gmail & Calendar (10 minutes)</h4>
                             <ol>
@@ -221,11 +221,11 @@
                                 <li>Click "Connect" in n8n and authorize with your Google account</li>
                             </ol>
                         </div>
-                        
+
                         <div class="tutorial-section">
                             <h4>Step 4: Build the Workflow (20 minutes)</h4>
                             <p>In n8n, create a new workflow with these nodes:</p>
-                            
+
                             <div class="workflow-nodes">
                                 <h5>Node 1: Schedule Trigger (7am daily)</h5>
                                 <ul>
@@ -233,7 +233,7 @@
                                     <li>Mode: Every Day</li>
                                     <li>Time: 07:00</li>
                                 </ul>
-                                
+
                                 <h5>Node 2: Get Calendar Events</h5>
                                 <ul>
                                     <li>Type: Google Calendar → Get Many Events</li>
@@ -241,14 +241,14 @@
                                     <li>Start Time: <code>{{$now}}</code></li>
                                     <li>End Time: <code>{{$now.plus(1, 'day')}}</code></li>
                                 </ul>
-                                
+
                                 <h5>Node 3: Get Emails</h5>
                                 <ul>
                                     <li>Type: Gmail → Get Many Messages</li>
                                     <li>Search Query: <code>newer_than:12h</code></li>
                                     <li>Max Results: 50</li>
                                 </ul>
-                                
+
                                 <h5>Node 4: Format Message</h5>
                                 <ul>
                                     <li>Type: Code (JavaScript)</li>
@@ -261,7 +261,7 @@ const emails = $input.all()[1].json.length;
 // Check for urgent keywords
 const urgentEmails = $input.all()[1].json.filter(msg => {
   const subject = msg.subject || '';
-  return subject.toLowerCase().includes('urgent') || 
+  return subject.toLowerCase().includes('urgent') ||
          subject.toLowerCase().includes('inspection') ||
          subject.toLowerCase().includes('contract') ||
          subject.toLowerCase().includes('asap');
@@ -283,7 +283,7 @@ return [{
   }
 }];
 </code></pre>
-                                
+
                                 <h5>Node 5: Send Telegram Message</h5>
                                 <ul>
                                     <li>Type: Telegram → Send Message</li>
@@ -293,7 +293,7 @@ return [{
                                 </ul>
                             </div>
                         </div>
-                        
+
                         <div class="tutorial-section">
                             <h4>Step 5: Test & Activate (5 minutes)</h4>
                             <ol>
@@ -305,7 +305,7 @@ return [{
                                 <li>Save and activate second workflow</li>
                             </ol>
                         </div>
-                        
+
                         <div class="entry-learned">
                             <h4>Expected Results</h4>
                             <p>Each morning and afternoon, you'll receive a message like:</p>
@@ -320,7 +320,7 @@ return [{
                             </blockquote>
                         </div>
                     </div>
-                    
+
                     <div class="entry-footer">
                         <div class="entry-status">
                             <span class="status-badge status-building">Build It Yourself</span>
@@ -328,46 +328,6 @@ return [{
                         <div class="entry-links">
                             <a href="https://docs.n8n.io/integrations/builtin/credentials/google/" class="entry-link" target="_blank">
                                 n8n Google Setup Docs →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </article>
-                
-                <div class="entry-body">
-                    <div class="entry-summary">
-                        <p>Used Replit's AI-powered development environment to rapidly prototype a customizable "Agent Hub" CRM specifically designed for real estate team workflows. The AI-assisted coding experience dramatically accelerated build time, though large-scale projects require careful backend token management. This proof-of-concept demonstrates how AI-native IDEs can serve as powerful tools for rapid real estate tech prototyping.</p>
-                    </div>
-                    
-                    <div class="entry-details">
-                        <h3>The Problem</h3>
-                        <p>Real estate teams need CRMs that match their unique workflows — generic solutions force teams to adapt rather than the software adapting to them. We wanted to test whether AI-assisted development could deliver a custom team management platform in hours, not months.</p>
-                        
-                        <h3>The Solution</h3>
-                        <p>Built a fully functional Agent Hub CRM using Replit's AI assistant. The platform supports team member management, activity tracking, and role-based access controls tailored for real estate operations.</p>
-                        
-                        <div class="entry-tools">
-                            <h4>Tools Used</h4>
-                            <ul class="tools-list">
-                                <li>Replit.ai IDE with AI assistant</li>
-                                <li>Custom CRM architecture</li>
-                                <li>Real-time collaboration features</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="entry-learned">
-                            <h4>Key Insight</h4>
-                            <p>While Replit's build costs are minimal on the frontend, backend token consumption scales quickly on complex projects. The smart approach: build in transferable languages (JavaScript, Python) so you can migrate to GitHub or self-hosted infrastructure once validated. This gives you AI-speed development without vendor lock-in.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="entry-footer">
-                        <div class="entry-status">
-                            <span class="status-badge status-deployed">Deployed</span>
-                        </div>
-                        <div class="entry-links">
-                            <a href="https://agent-hub--floridahotdeals.replit.app/" class="entry-link" target="_blank" rel="noopener noreferrer">
-                                View Live Demo →
                             </a>
                         </div>
                     </div>
@@ -387,19 +347,19 @@ return [{
                         <span class="entry-category">Backend Infrastructure</span>
                     </div>
                 </div>
-                
+
                 <div class="entry-body">
                     <div class="entry-summary">
                         <p>Connected the quiz and contact forms to Google Sheets for real-time lead capture. The challenge: avoiding conflicts with existing FPL Form Submissions data while capturing 20 quiz answers per user plus scoring.</p>
                     </div>
-                    
+
                     <div class="entry-details">
                         <h3>The Problem</h3>
                         <p>Forms were submitting but data was going nowhere. Needed a unified destination for both quiz and contact submissions without breaking existing FPL form integration.</p>
-                        
+
                         <h3>The Solution</h3>
                         <p>Built a Google Apps Script web app handling both submission types. Unified structure with 32 columns: Source (Quiz/Contact), email, score (0-100), category, Q1-Q20 answers, plus UTM tracking. Auto-creates "AI Coach Form Submissions" sheet on first submission.</p>
-                        
+
                         <div class="entry-tools">
                             <h4>Tools Used</h4>
                             <ul class="tools-list">
@@ -410,7 +370,7 @@ return [{
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div class="entry-footer">
                         <div class="entry-status">
                             <span class="status-badge status-building">Building</span>
@@ -438,16 +398,16 @@ return [{
                         <span class="entry-category">Machine Learning</span>
                     </div>
                 </div>
-                
+
                 <div class="entry-body">
                     <div class="entry-summary">
                         <p>Built a scoring system to rank Lis Pendens leads by likelihood to sell. Analyzing 6 months of data to identify patterns in filing-to-sale timelines.</p>
                     </div>
-                    
+
                     <div class="entry-details">
                         <h3>What We Learned</h3>
                         <p>Properties with multiple liens are 4.3x more likely to sell within 90 days. County matters less than we thought — financial distress is the key signal.</p>
-                        
+
                         <div class="entry-tools">
                             <h4>Tools Used</h4>
                             <ul class="tools-list">
@@ -457,7 +417,7 @@ return [{
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div class="entry-footer">
                         <div class="entry-status">
                             <span class="status-badge status-testing">Testing</span>
@@ -480,16 +440,16 @@ return [{
                         <span class="entry-category">Computer Vision</span>
                     </div>
                 </div>
-                
+
                 <div class="entry-body">
                     <div class="entry-summary">
                         <p>Testing Claude's vision capabilities for analyzing MLS listing photos. Goal: auto-generate improvement suggestions that increase click-through rates.</p>
                     </div>
-                    
+
                     <div class="entry-details">
                         <h3>Initial Results</h3>
                         <p>AI successfully identified poor lighting in 78% of photos with <5% engagement. Suggested staging changes increased simulated CTR by 23% in test batch.</p>
-                        
+
                         <div class="entry-tools">
                             <h4>Tools Used</h4>
                             <ul class="tools-list">
@@ -499,7 +459,7 @@ return [{
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div class="entry-footer">
                         <div class="entry-status">
                             <span class="status-badge status-idea">Idea</span>
@@ -574,7 +534,7 @@ return [{
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
+            <div class="footer-footer">
                 <p>© 2026 AgentAICoach. Built in The Lab. 🧪</p>
             </div>
         </div>
