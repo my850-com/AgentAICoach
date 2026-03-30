@@ -64,6 +64,25 @@
         </div>
     </section>
 
+    <!-- Search Section -->
+    <section class="lab-search">
+        <div class="container">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="lab-search-input" placeholder="Search experiments by keyword, tool, or category..." aria-label="Search The Lab">
+                <button class="search-clear" id="search-clear" aria-label="Clear search">×</button>
+            </div>
+            <div class="search-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="Backend Infrastructure">Backend</button>
+                <button class="filter-btn" data-filter="Machine Learning">ML</button>
+                <button class="filter-btn" data-filter="Computer Vision">Vision</button>
+                <button class="filter-btn" data-filter="Automation">Automation</button>
+            </div>
+            <p class="search-results" id="search-results"></p>
+        </div>
+    </section>
+
     <!-- Lab Feed -->
     <section class="lab-feed">
         <div class="container">
@@ -275,5 +294,6 @@
     </footer>
 
     <script src="main.js"></script>
+    <script src="lab.js"></script>
 </body>
 </html>
