@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Lab - Admin | AgentAICoach</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Inter, sans-serif;
+            background: #f7fafc;
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+        
+        .admin-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .admin-header {
+            background: #1a365d;
+            color: white;
+            padding: 32px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .admin-header h1 {
+            font-size: 1.75rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .admin-header p {
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+        
+        .warning {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .warning-icon {
+            font-size: 1.25rem;
+        }
+        
+        .warning-text {
+            font-size: 0.9rem;
+            color: #92400e;
+        }
+        
+        .form-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .form-section h2 {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            color: #1a365d;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+        
+        label .required {
+            color: #ef4444;
+        }
+        
+        input[type="text"],
+        input[type="date"],
+        input[type="url"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+        
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #1a365d;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        select {
+            background: white;
+            cursor: pointer;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        
+        .hint {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 4px;
+        }
+        
+        .generate-btn {
+            width: 100%;
+            padding: 14px;
+            background: #1a365d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .generate-btn:hover {
+            background: #0f172a;
+        }
+        
+        .output-section {
+            display: none;
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 24px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .output-section.visible {
+            display: block;
+        }
+        
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .output-header h2 {
+            font-size: 1.1rem;
+        }
+        
+        .copy-btn {
+            padding: 8px 16px;
+            background: #06b6d4;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .copy-btn:hover {
+            background: #0891b2;
+        }
+        
+        .copy-btn.copied {
+            background: #10b981;
+        }
+        
+        .output-code {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .instructions {
+            background: #f0f9ff;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+        
+        .instructions h3 {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: #0369a1;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+            font-size: 0.85rem;
+            color: #1e293b;
+        }
+        
+        .instructions li {
+            margin-bottom: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <header class="admin-header">
+            <h1>🧪 The Lab Admin</h1>
+            <p>Create new Lab entries for the team</p>
+        </header>
+        
+        <div class="warning">
+            <span class="warning-icon">⚠️</span>
+            <div class="warning-text">
+                <strong>Internal Use Only</strong><br>
+                Do not link this page from the public site. Bookmark this URL for team access.
+            </div>
+        </div>
+        
+        <form id="entry-form">
+            <div class="form-section">
+                <h2>📅 Basic Info</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="date">Date <span class="required">*</span></label>
+                        <input type="date" id="date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="category">Category <span class="required">*</span></label>
+                        <select id="category" required>
+                            <option value="">Select category</option>
+                            <option value="Backend Infrastructure">Backend Infrastructure</option>
+                            <option value="Machine Learning">Machine Learning</option>
+                            <option value="Computer Vision">Computer Vision</option>
+                            <option value="Natural Language Processing">Natural Language Processing</option>
+                            <option value="Automation">Automation</option>
+                            <option value="Integration">Integration</option>
+                            <option value="UI/UX">UI/UX</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="title">Entry Title <span class="required">*</span></label>
+                    <input type="text" id="title" placeholder="e.g., AgentAICoach Quiz Integration Pipeline" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="summary">Summary <span class="required">*</span></label>
+                    <textarea id="summary" rows="3" placeholder="Brief description of what you're building/testing..." required></textarea>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h2>🔧 Details</h2>
+                
+                <div class="form-group">
+                    <label for="problem">The Problem</label>
+                    <textarea id="problem" rows="4" placeholder="What challenge were you trying to solve?"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="solution">The Solution</label>
+                    <textarea id="solution" rows="4" placeholder="How did you solve it? What approach did you take?"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tools">Tools Used</label>
+                    <input type="text" id="tools" placeholder="e.g., Google Apps Script, JavaScript, GitHub Pages">
+                    <p class="hint">Separate tools with commas</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select id="status">
+                        <option value="Building">Building — In progress</option>
+                        <option value="Testing">Testing — Validating results</option>
+                        <option value="Idea">Idea — Proof of concept</option>
+                        <option value="Deployed">Deployed — Live & working</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="link">Link (Optional)</label>
+                    <input type="url" id="link" placeholder="https://...">
+                    <p class="hint">Link to live demo, PR, or related page</p>
+                </div>
+            </div>
+            
+            <button type="submit" class="generate-btn">Generate Lab Entry HTML</button>
+        </form>
+        
+        <div id="output" class="output-section">
+            <div class="output-header">
+                <h2>📋 Generated HTML</h2>
+                <button id="copy-btn" class="copy-btn">Copy to Clipboard</button>
+            </div>
+            <pre id="output-code" class="output-code"></pre>
+            
+            <div class="instructions">
+                <h3>Next Steps</h3>
+                <ol>
+                    <li>Click "Copy to Clipboard" above</li>
+                    <li>Open <code>lab.html</code> in your code editor or GitHub</li>
+                    <li>Find the comment <code>&lt;!-- New entries go here --&gt;</code></li>
+                    <li>Paste this HTML <strong>before</strong> that comment (newest first)</li>
+                    <li>Save and push to GitHub</li>
+                    <li>Wait 1-2 minutes for GitHub Pages to update</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const form = document.getElementById('entry-form');
+        const output = document.getElementById('output');
+        const outputCode = document.getElementById('output-code');
+        const copyBtn = document.getElementById('copy-btn');
+        
+        // Set today's date as default
+        document.getElementById('date').valueAsDate = new Date();
+        
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const date = document.getElementById('date').value;
+            const title = document.getElementById('title').value;
+            const category = document.getElementById('category').value;
+            const summary = document.getElementById('summary').value;
+            const problem = document.getElementById('problem').value;
+            const solution = document.getElementById('solution').value;
+            const tools = document.getElementById('tools').value;
+            const status = document.getElementById('status').value;
+            const link = document.getElementById('link').value;
+            
+            // Parse date for display
+            const dateObj = new Date(date);
+            const day = dateObj.getUTCDate();
+            const month = dateObj.toLocaleString('en-US', { month: 'short', timeZone: 'UTC' });
+            const year = dateObj.getUTCFullYear();
+            
+            // Generate tools HTML
+            const toolsList = tools
+                .split(/,\s*/)
+                .filter(t => t.trim())
+                .map(t => `<li>${escapeHtml(t.trim())}</li>`)
+                .join('\n                            ');
+            
+            // Build HTML
+            let html = `            <!-- Entry: ${date} -->
+            <article class="lab-entry">
+                <div class="entry-header">
+                    <time class="entry-date" datetime="${date}">
+                        <span class="date-day">${day}</span>
+                        <span class="date-month">${month}</span>
+                        <span class="date-year">${year}</span>
+                    </time>
+                    <div class="entry-title-wrap">
+                        <h2 class="entry-title">${escapeHtml(title)}</h2>
+                        <span class="entry-category">${escapeHtml(category)}</span>
+                    </div>
+                </div>
+                
+                <div class="entry-body">
+                    <div class="entry-summary">
+                        <p>${escapeHtml(summary)}</p>
+                    </div>
+                    
+                    <div class="entry-details">`;
+            
+            if (problem) {
+                html += `
+                        <h3>The Problem</h3>
+                        <p>${escapeHtml(problem)}</p>`;
+            }
+            
+            if (solution) {
+                html += `
+                        <h3>The Solution</h3>
+                        <p>${escapeHtml(solution)}</p>`;
+            }
+            
+            if (toolsList) {
+                html += `
+                        <div class="entry-tools">
+                            <h4>Tools Used</h4>
+                            <ul class="tools-list">
+                                ${toolsList}
+                            </ul>
+                        </div>`;
+            }
+            
+            html += `
+                    </div>
+                    
+                    <div class="entry-footer">
+                        <div class="entry-status">
+                            <span class="status-badge status-${status.toLowerCase()}">${escapeHtml(status)}</span>`;
+            
+            if (status === 'Building') {
+                html += `
+                            <span class="status-note">In progress</span>`;
+            } else if (status === 'Testing') {
+                html += `
+                            <span class="status-note">Validation in progress</span>`;
+            } else if (status === 'Idea') {
+                html += `
+                            <span class="status-note">Proof of concept</span>`;
+            }
+            
+            html += `
+                        </div>`;
+            
+            if (link) {
+                html += `
+                        <div class="entry-links">
+                            <a href="${escapeHtml(link)}" class="entry-link" target="_blank">
+                                View →
+                            </a>
+                        </div>`;
+            }
+            
+            html += `
+                    </div>
+                </div>
+            </article>
+
+`;
+            
+            outputCode.textContent = html;
+            output.classList.add('visible');
+            output.scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(outputCode.textContent)
+                .then(() => {
+                    copyBtn.textContent = 'Copied!';
+                    copyBtn.classList.add('copied');
+                    setTimeout(() => {
+                        copyBtn.textContent = 'Copy to Clipboard';
+                        copyBtn.classList.remove('copied');
+                    }, 2000);
+                })
+                .catch(() => {
+                    alert('Failed to copy. Please select and copy manually.');
+                });
+        });
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>
