@@ -509,3 +509,255 @@
     color: var(--primary);
     font-weight: 500;
 }
+
+/* Lab Post Page Styles */
+.lab-post-header {
+    padding: 120px 20px 40px;
+    background: linear-gradient(135deg, var(--bg) 0%, var(--bg-white) 100%);
+    border-bottom: 1px solid var(--border);
+}
+
+.lab-breadcrumbs {
+    margin-bottom: 24px;
+}
+
+.lab-breadcrumbs a {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.lab-breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+.lab-post-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.lab-post-meta .entry-date {
+    position: static;
+    flex-direction: row;
+    min-width: auto;
+    padding: 8px 16px;
+    gap: 6px;
+}
+
+.lab-post-meta .entry-category {
+    background: var(--bg);
+    color: var(--primary);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.lab-post-meta .entry-badge {
+    background: var(--secondary);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.lab-post-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.lab-post-summary {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    max-width: 700px;
+}
+
+.lab-post-decoration {
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+    margin-top: 40px;
+}
+
+.lab-post-content {
+    padding: 60px 20px;
+    background: var(--bg-white);
+}
+
+.lab-post-content .container {
+    max-width: 800px;
+}
+
+.lab-post-content .post-body {
+    padding: 0 20px;
+}
+
+.lab-post-content h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 40px 0 16px;
+}
+
+.lab-post-content h3:first-child {
+    margin-top: 0;
+}
+
+.lab-post-content h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 28px 0 12px;
+}
+
+.lab-post-content p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.lab-post-content ul {
+    margin: 16px 0;
+    padding-left: 24px;
+}
+
+.lab-post-content li {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 8px;
+}
+
+.lab-post-content ol {
+    margin: 16px 0;
+    padding-left: 24px;
+}
+
+.lab-post-content ol li {
+    margin-bottom: 12px;
+}
+
+.lab-post-content pre {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 20px 0;
+}
+
+.lab-post-content code {
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: var(--primary);
+}
+
+.lab-post-content blockquote {
+    background: var(--bg);
+    border-left: 4px solid var(--secondary);
+    padding: 20px 24px;
+    margin: 24px 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--text-light);
+}
+
+.lab-post-content blockquote br {
+    display: block;
+    margin: 8px 0;
+}
+
+.lab-post-content .tools-list {
+    background: var(--bg);
+    padding: 20px 20px 20px 44px;
+    border-radius: 8px;
+    list-style: disc;
+}
+
+.tutorial-section {
+    background: var(--bg);
+    padding: 28px;
+    border-radius: 12px;
+    margin: 24px 0;
+}
+
+.tutorial-section h4 {
+    margin-top: 0;
+    color: var(--primary);
+}
+
+.tutorial-section > p {
+    margin-top: 12px;
+}
+
+.workflow-nodes {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 16px;
+}
+
+.workflow-nodes h5 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 20px 0 8px;
+    color: var(--text);
+}
+
+.workflow-nodes h5:first-child {
+    margin-top: 0;
+}
+
+.workflow-nodes ul {
+    margin: 8px 0;
+    padding-left: 20px;
+}
+
+.workflow-nodes li {
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+}
+
+.insight-box {
+    background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+    color: white;
+    padding: 28px;
+    border-radius: 12px;
+    margin: 28px 0;
+}
+
+.insight-box h4 {
+    color: white;
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+.insight-box p {
+    color: rgba(255,255,255,0.95);
+    margin-bottom: 0;
+}
+
+.status-box {
+    margin: 24px 0;
+}
+
+.post-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+}

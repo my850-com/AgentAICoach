@@ -432,20 +432,44 @@
         </form>
         
         <div id="output" class="output-section">
-            <div class="output-header">
-                <h2>📋 Generated HTML</h2>
-                <button id="copy-btn" class="copy-btn">Copy to Clipboard</button>
+            <div class="output-tabs" style="display: flex; gap: 8px; margin-bottom: 16px;">
+                <button type="button" class="tab-btn active" data-tab="index" style="padding: 8px 16px; border: 1px solid #e2e8f0; background: #1a365d; color: white; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Lab Index Entry</button>
+                <button type="button" class="tab-btn" data-tab="post" style="padding: 8px 16px; border: 1px solid #e2e8f0; background: white; color: #1a365d; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">Full Post Page</button>
             </div>
-            <pre id="output-code" class="output-code"></pre>
-            
+
+            <div id="index-output" class="tab-content">
+                <div class="output-header">
+                    <h2>📋 Lab Index Entry (Summary)</h2>
+                    <button id="copy-index-btn" class="copy-btn">Copy Index Entry</button>
+                </div>
+                <pre id="output-index-code" class="output-code"></pre>
+            </div>
+
+            <div id="post-output" class="tab-content" style="display: none;">
+                <div class="output-header">
+                    <h2>📄 Full Post Page HTML</h2>
+                    <button id="copy-post-btn" class="copy-btn">Copy Post HTML</button>
+                </div>
+                <pre id="output-post-code" class="output-code"></pre>
+            </div>
+
+            <div class="instructions" style="margin-top: 24px;">
+                <h3>🚀 Quick Publish (Option A)</h3>
+                <p style="margin-bottom: 12px; color: #64748b;">Send this entry to Sherlock for automatic publishing:</p>
+                <button type="button" id="send-btn" class="generate-btn" style="background: #10b981;">
+                    ✉️ Send Entry to Sherlock
+                </button>
+                <p class="hint" style="margin-top: 8px;">This opens Telegram with the formatted entry. Sherlock will review and publish automatically.</p>
+            </div>
+
             <div class="instructions">
-                <h3>Next Steps</h3>
+                <h3>Manual Publish (Option B)</h3>
                 <ol>
-                    <li>Click "Copy to Clipboard" above</li>
-                    <li>Open <code>lab.html</code> in your code editor or GitHub</li>
-                    <li>Find the comment <code>&lt;!-- New entries go here --&gt;</code></li>
-                    <li>Paste this HTML <strong>before</strong> that comment (newest first)</li>
-                    <li>Save and push to GitHub</li>
+                    <li>Switch to "Lab Index Entry" tab above, click "Copy"</li>
+                    <li>Open <code>lab.html</code> in GitHub, paste before the first entry</li>
+                    <li>Switch to "Full Post Page" tab, click "Copy"</li>
+                    <li>Create new file in <code>lab/</code> folder following naming pattern</li>
+                    <li>Save and commit both files</li>
                     <li>Wait 1-2 minutes for GitHub Pages to update</li>
                 </ol>
             </div>
@@ -561,31 +585,248 @@
                         </div>`;
             }
             
-            html += `
+            let indexHtml = `            <!-- Entry: ${date} -->
+            <article class="lab-entry">
+                <div class="entry-header">
+                    <time class="entry-date" datetime="${date}">
+                        <span class="date-day">${day}</span>
+                        <span class="date-month">${month}</span>
+                        <span class="date-year">${year}</span>
+                    </time>
+                    <div class="entry-title-wrap">
+                        <h2 class="entry-title">${escapeHtml(title)}</h2>
+                        <span class="entry-category">${escapeHtml(category)}</span>
+                    </div>
+                </div>
+                
+                <div class="entry-body">
+                    <div class="entry-summary">
+                        <p>${escapeHtml(summary.substring(0, 200))}${summary.length > 200 ? '...' : ''}</p>
+                    </div>
+                </div>
+                
+                <div class="entry-footer">
+                    <div class="entry-status">
+                        <span class="status-badge status-${status.toLowerCase().replace(/\s+/g, '-')}">${escapeHtml(status)}</span>
+                    </div>
+                    <div class="entry-links">
+                        <a href="lab/${slug}-${date}.html" class="entry-link">
+                            Read Full Post →
+                        </a>
                     </div>
                 </div>
             </article>
 
 `;
+
+            // Build full post HTML
+            let postHtml = generatePostPage(date, title, category, summary, problem, solution, tools, status, link, slug, day, month, year);
             
-            outputCode.textContent = html;
+            document.getElementById('output-index-code').textContent = indexHtml;
+            document.getElementById('output-post-code').textContent = postHtml;
             output.classList.add('visible');
             output.scrollIntoView({ behavior: 'smooth' });
         });
         
-        copyBtn.addEventListener('click', () => {
-            navigator.clipboard.writeText(outputCode.textContent)
-                .then(() => {
-                    copyBtn.textContent = 'Copied!';
-                    copyBtn.classList.add('copied');
-                    setTimeout(() => {
-                        copyBtn.textContent = 'Copy to Clipboard';
-                        copyBtn.classList.remove('copied');
-                    }, 2000);
-                })
-                .catch(() => {
-                    alert('Failed to copy. Please select and copy manually.');
+        // Generate slug from title
+        function generateSlug(title) {
+            return title
+                .toLowerCase()
+                .replace(/[^a-z0-9\s]/g, '')
+                .replace(/\s+/g, '-')
+                .substring(0, 30);
+        }
+
+        // Generate full post page
+        function generatePostPage(date, title, category, summary, problem, solution, tools, status, link, slug, day, month, year) {
+            const fileSlug = `${slug}-${date}`;
+            const toolsList = tools
+                .split(/,\s*/)
+                .filter(t => t.trim())
+                .map(t => `<li>${escapeHtml(t.trim())}</li>`)
+                .join('\n                            ');
+            
+            let details = '';
+            if (problem) {
+                details += `
+                <h3>The Problem</h3>
+                <p>${escapeHtml(problem)}</p>`;
+            }
+            if (solution) {
+                details += `
+                <h3>The Solution</h3>
+                <p>${escapeHtml(solution)}</p>`;
+            }
+            if (toolsList) {
+                details += `
+                <div class="entry-tools">
+                    <h4>Tools Used</h4>
+                    <ul class="tools-list">
+                        ${toolsList}
+                    </ul>
+                </div>`;
+            }
+            
+            let statusNote = '';
+            if (status === 'Building') statusNote = '<span class="status-note">In progress</span>';
+            else if (status === 'Testing') statusNote = '<span class="status-note">Validation in progress</span>';
+            else if (status === 'Idea') statusNote = '<span class="status-note">Proof of concept</span>';
+
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="${escapeHtml(summary.substring(0, 160))}">
+    <title>${escapeHtml(title)} | The Lab - AgentAICoach</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../lab.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="nav-brand">
+                <span class="brand-icon">🤖</span>
+                <span class="brand-text">AgentAICoach</span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links">
+                <a href="../index.html#services">Services</a>
+                <a href="../lab.html" class="active">The Lab</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../index.html#quiz" class="btn btn-outline">Take the Quiz</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="lab-post-header">
+        <div class="container">
+            <nav class="lab-breadcrumbs">
+                <a href="../lab.html">← The Lab</a>
+            </nav>
+            <div class="lab-post-meta">
+                <time class="entry-date" datetime="${date}">
+                    <span class="date-day">${day}</span>
+                    <span class="date-month">${month}</span>
+                    <span class="date-year">${year}</span>
+                </time>
+                <span class="entry-category">${escapeHtml(category)}</span>
+            </div>
+            <h1 class="lab-post-title">${escapeHtml(title)}</h1>
+            <p class="lab-post-summary">${escapeHtml(summary)}</p>
+        </div>
+    </section>
+
+    <article class="lab-post-content">
+        <div class="container">
+            <div class="post-body">
+                ${details}
+                <div class="entry-footer" style="margin-top: 40px;">
+                    <div class="entry-status">
+                        <span class="status-badge status-${status.toLowerCase().replace(/\s+/g, '-')}">${escapeHtml(status)}</span>
+                        ${statusNote}
+                    </div>
+                    ${link ? `<div class="entry-links"><a href="${escapeHtml(link)}" class="btn btn-primary" target="_blank">View Live →</a></div>` : ''}
+                </div>
+            </div>
+            <nav class="post-navigation">
+                <a href="../lab.html" class="btn btn-outline">← Back to Lab</a>
+            </nav>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="../index.html" class="brand-link">
+                        <span class="brand-icon">🤖</span>
+                        <span class="brand-text">AgentAICoach</span>
+                    </a>
+                    <p>Teaching real estate professionals to fish in the AI era.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 AgentAICoach. Built in The Lab. 🧪</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"><\/script>
+</body>
+</html>`;
+        }
+
+        // Tab switching
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => {
+                    b.classList.remove('active');
+                    b.style.background = 'white';
+                    b.style.color = '#1a365d';
                 });
+                btn.classList.add('active');
+                btn.style.background = '#1a365d';
+                btn.style.color = 'white';
+                
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.style.display = 'none';
+                });
+                document.getElementById(btn.dataset.tab + '-output').style.display = 'block';
+            });
+        });
+
+        // Copy buttons
+        document.getElementById('copy-index-btn').addEventListener('click', () => {
+            navigator.clipboard.writeText(document.getElementById('output-index-code').textContent)
+                .then(() => alert('Index entry copied!'));
+        });
+
+        document.getElementById('copy-post-btn').addEventListener('click', () => {
+            navigator.clipboard.writeText(document.getElementById('output-post-code').textContent)
+                .then(() => alert('Post HTML copied!'));
+        });
+
+        // Send to Sherlock
+        document.getElementById('send-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            const date = document.getElementById('date').value;
+            const title = document.getElementById('title').value;
+            const category = document.getElementById('category').value;
+            const summary = document.getElementById('summary').value;
+            
+            if (!date || !title || !category || !summary) {
+                alert('Please fill in all required fields first (Date, Title, Category, Summary)');
+                return;
+            }
+
+            const indexEntry = document.getElementById('output-index-code').textContent;
+            const postPage = document.getElementById('output-post-code').textContent;
+            
+            const message = `🧪 NEW LAB ENTRY
+
+Date: ${date}
+Title: ${title}
+Category: ${category}
+Status: ${document.getElementById('status').value}
+
+=== INDEX ENTRY ===\n${indexEntry}\n
+=== POST PAGE ===\n${postPage}`;
+
+            // Open Telegram with pre-filled message
+            const telegramUrl = 'https://t.me/share/url?url=' + encodeURIComponent(window.location.href) + 
+                               '&text=' + encodeURIComponent('New Lab entry ready to publish: ' + title);
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(message).then(() => {
+                alert('Entry copied! A Telegram window will open. Paste the content and send to Sherlock.');
+                window.open(telegramUrl, '_blank');
+            });
         });
         
         function escapeHtml(text) {
