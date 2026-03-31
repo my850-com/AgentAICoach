@@ -291,57 +291,62 @@
         {
             name: "AI Beginner",
             minScore: 0,
-            maxScore: 35,
+            maxScore: 40,
             icon: "🌱",
             color: "#86efac",
             description: "You're at the beginning of your AI journey. There's tremendous opportunity ahead to transform your business.",
             recommendation: "diy",
             recommendationTitle: "DIY AI Course",
-            recommendationText: "Start with our self-paced course to build your foundation. You'll learn the basics and develop practical skills at your own pace."
+            recommendationText: "Our 12-module self-paced course gives you the foundation to start using AI immediately in your real estate business.",
+            price: "$349"
         },
         {
             name: "AI Emerging",
-            minScore: 36,
-            maxScore: 55,
+            minScore: 41,
+            maxScore: 60,
             icon: "🌿",
             color: "#67e8f9",
-            description: "You've dipped your toes in the AI waters. You understand the basics and have started experimenting.",
+            description: "You've dipped your toes in AI waters. You understand the basics and are ready to apply them systematically.",
             recommendation: "diy",
-            recommendationTitle: "DIY AI Course + Community",
-            recommendationText: "Our course will help you expand your knowledge with structured learning and access to prompt libraries designed for real estate."
+            recommendationTitle: "DIY AI Course",
+            recommendationText: "Build practical skills with structured learning, 200+ prompt templates, and real estate-specific use cases.",
+            price: "$349"
         },
         {
             name: "AI Active User",
-            minScore: 56,
-            maxScore: 70,
+            minScore: 61,
+            maxScore: 75,
             icon: "🚀",
             color: "#60a5fa",
-            description: "You're actively using AI and seeing benefits. You're ready to level up your implementation.",
-            recommendation: "coaching",
-            recommendationTitle: "Private Coaching Program",
-            recommendationText: "With our 1-on-1 coaching, we'll optimize your current workflows and build custom AI systems tailored to your specific business needs."
+            description: "You're actively using AI and seeing benefits. You need guided implementation to scale your workflows.",
+            recommendation: "guided",
+            recommendationTitle: "Guided Implementation",
+            recommendationText: "4-week structured program with live sessions, custom prompt development, and accountability to implement AI in your specific business.",
+            price: "$1,299"
         },
         {
             name: "AI Advanced",
-            minScore: 71,
-            maxScore: 85,
+            minScore: 76,
+            maxScore: 90,
             icon: "⚡",
             color: "#a78bfa",
-            description: "You're ahead of most agents. You use AI regularly and are looking for advanced applications.",
-            recommendation: "coaching",
-            recommendationTitle: "Private Coaching + Custom Implementation",
-            recommendationText: "Our coaching program will help you master advanced AI techniques and implement sophisticated workflows that give you a competitive edge."
+            description: "You're ahead of most agents. You need systems-level automation and advanced custom implementations.",
+            recommendation: "elite",
+            recommendationTitle: "Elite AI Systems",
+            recommendationText: "Custom automation builds for your business. Starts with a $500 audit, then module-based pricing from $750-$2,000 per system.",
+            price: "Modular"
         },
         {
             name: "AI-Ready Leader",
-            minScore: 86,
+            minScore: 91,
             maxScore: 100,
             icon: "👑",
             color: "#fbbf24",
-            description: "You're an AI power user ready for full transformation. You understand AI deeply and want maximum leverage.",
-            recommendation: "custom",
-            recommendationTitle: "Done-For-You AI System",
-            recommendationText: "You need custom AI systems built specifically for your business. We'll design and implement a complete AI-powered infrastructure."
+            description: "You're an AI power user ready for full business transformation. You want maximum leverage through custom systems.",
+            recommendation: "elite",
+            recommendationTitle: "Elite AI Systems",
+            recommendationText: "Comprehensive business audit + custom AI systems built to your specifications. Designed for top producers and teams.",
+            price: "Modular"
         }
     ];
 
@@ -718,37 +723,45 @@
         
         if (category.recommendation === 'diy') {
             recommendationHtml = `
-                <strong>${category.recommendationTitle} - $497</strong>
+                <strong>${category.recommendationTitle} — ${category.price}</strong>
                 <p>${category.recommendationText}</p>
                 <ul style="text-align: left; margin-top: 16px;">
-                    <li>12 comprehensive training modules</li>
+                    <li>12 self-paced training modules</li>
                     <li>200+ real estate prompt templates</li>
                     <li>Private community access</li>
+                    <li>Monthly Q&A recordings</li>
                 </ul>
+                <p style="margin-top: 16px;">
+                    <a href="#" class="btn btn-primary" onclick="alert('Coming soon! DIY Course enrollment opening soon.'); return false;">Get Started — $349</a>
+                </p>
             `;
-        } else if (category.recommendation === 'coaching') {
+        } else if (category.recommendation === 'guided') {
             recommendationHtml = `
-                <strong>${category.recommendationTitle} - $2,497</strong>
+                <strong>${category.recommendationTitle} — ${category.price}</strong>
                 <p>${category.recommendationText}</p>
                 <ul style="text-align: left; margin-top: 16px;">
-                    <li>6 private 1-on-1 coaching sessions</li>
-                    <li>Custom AI workflow design for your business</li>
-                    <li>Direct messaging access for questions</li>
-                    <li>DIY course included</li>
+                    <li>4 weekly live sessions (Zoom)</li>
+                    <li>Custom prompts for YOUR business</li>
+                    <li>1-on-1 workflow optimization</li>
+                    <li>DIY course included as reference</li>
                 </ul>
+                <p style="margin-top: 16px;">
+                    <a href="#contact" class="btn btn-primary">Apply Now — $1,299</a>
+                </p>
             `;
         } else {
             recommendationHtml = `
-                <strong>${category.recommendationTitle}</strong>
+                <strong>${category.recommendationTitle} — ${category.price} Pricing</strong>
                 <p>${category.recommendationText}</p>
                 <ul style="text-align: left; margin-top: 16px;">
-                    <li>Custom AI system architecture</li>
-                    <li>Full implementation and training</li>
-                    <li>Ongoing support and optimization</li>
-                    <li>Team onboarding included</li>
+                    <li>Business AI audit — $500</li>
+                    <li>Lead intake automation — $1,500</li>
+                    <li>Listing marketing system — $1,000</li>
+                    <li>Content automation — $750</li>
+                    <li>Custom data systems (Lis Pendens-style) — $2,000+</li>
                 </ul>
                 <p style="margin-top: 16px;">
-                    <a href="#contact" class="btn btn-primary">Schedule Custom Build Consultation</a>
+                    <a href="#contact" class="btn btn-primary">Schedule Build Consultation</a>
                 </p>
             `;
         }
