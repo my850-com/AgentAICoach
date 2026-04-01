@@ -46,14 +46,14 @@
             },
             {
                 id: 3,
-                question: "How would you rate your understanding of AI's potential in real estate?",
+                question: "Which of these have you personally used AI for in your real estate business?",
                 category: "awareness",
                 options: [
-                    { text: "Minimal - I'm just learning what's possible", score: 1 },
-                    { text: "Basic - I know it can write listings", score: 2 },
-                    { text: "Moderate - I understand several use cases", score: 3 },
-                    { text: "Good - I know many ways AI can help my business", score: 4 },
-                    { text: "Excellent - I stay current with AI real estate trends", score: 5 }
+                    { text: "None - I've only heard of AI but never used it", score: 1 },
+                    { text: "Writing property descriptions only", score: 2 },
+                    { text: "Listings + emails/communications", score: 3 },
+                    { text: "Marketing content + analysis/reports", score: 4 },
+                    { text: "Multiple workflows + automation systems", score: 5 }
                 ]
             },
             {
@@ -70,14 +70,14 @@
             },
             {
                 id: 5,
-                question: "How do you currently stay updated on real estate technology trends?",
+                question: "If you could eliminate ONE task from your business using AI immediately, what would it be?",
                 category: "awareness",
                 options: [
-                    { text: "I don't actively follow tech trends", score: 1 },
-                    { text: "Occasional articles from general sources", score: 2 },
-                    { text: "Real estate specific blogs/newsletters", score: 3 },
-                    { text: "Regularly consume real estate tech content", score: 4 },
-                    { text: "Active in communities discussing RE tech/AI", score: 5 }
+                    { text: "I'm not sure - need to learn what's possible first", score: 1 },
+                    { text: "Writing listings and property descriptions", score: 2 },
+                    { text: "Following up with leads and clients", score: 3 },
+                    { text: "Creating marketing content and social media", score: 4 },
+                    { text: "Managing my systems and business operations", score: 5 }
                 ]
             }
         ],
@@ -122,14 +122,14 @@
             },
             {
                 id: 9,
-                question: "How do you create marketing content (social media, blogs, ads)?",
+                question: "How do you create and manage marketing content?",
                 category: "workflow",
                 options: [
                     { text: "I don't create marketing content", score: 1 },
-                    { text: "Create everything manually", score: 2 },
-                    { text: "Use AI occasionally for ideas/captions", score: 3 },
-                    { text: "AI-assisted for most content creation", score: 4 },
-                    { text: "AI generates and schedules all content", score: 5 }
+                    { text: "Create everything manually, no AI", score: 2 },
+                    { text: "AI helps with ideas, I create and post", score: 3 },
+                    { text: "AI generates most content, I post manually", score: 4 },
+                    { text: "AI generates AND tools schedule/post automatically", score: 5 }
                 ]
             },
             {
@@ -174,14 +174,14 @@
             },
             {
                 id: 13,
-                question: "How would you describe your technical comfort level?",
+                question: "Which best describes your ability to set up new tools or systems?",
                 category: "readiness",
                 options: [
-                    { text: "I struggle with new technology", score: 1 },
-                    { text: "I can use basic software/apps with help", score: 2 },
-                    { text: "Comfortable with most standard software", score: 3 },
-                    { text: "Quick to learn new tools and platforms", score: 4 },
-                    { text: "Early adopter - love trying new tech", score: 5 }
+                    { text: "I need step-by-step help with everything", score: 1 },
+                    { text: "I can follow tutorials and documentation", score: 2 },
+                    { text: "I can figure things out myself", score: 3 },
+                    { text: "I can connect tools together", score: 4 },
+                    { text: "I build and customize systems", score: 5 }
                 ]
             },
             {
