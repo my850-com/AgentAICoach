@@ -732,8 +732,9 @@
                     <li>Monthly Q&A recordings</li>
                 </ul>
                 <p style="margin-top: 16px;">
-                    <a href="#" class="btn btn-primary" onclick="alert('Coming soon! DIY Course enrollment opening soon.'); return false;">Get Started — $349</a>
+                    <a href="consultation.html?service=diy" class="btn btn-primary">Book Free Consultation — $349</a>
                 </p>
+                <p style="font-size: 0.9rem; color: #64748b; margin-top: 8px;">Not sure? Book a free 15-minute call to discuss if this is right for you.</p>
             `;
         } else if (category.recommendation === 'guided') {
             recommendationHtml = `
@@ -746,8 +747,9 @@
                     <li>DIY course included as reference</li>
                 </ul>
                 <p style="margin-top: 16px;">
-                    <a href="#contact" class="btn btn-primary">Apply Now — $1,299</a>
+                    <a href="consultation.html?service=guided" class="btn btn-primary">Book Free Consultation — $1,299</a>
                 </p>
+                <p style="font-size: 0.9rem; color: #64748b; margin-top: 8px;">Book a free 15-minute call to discuss your goals and see if this program fits.</p>
             `;
         } else {
             recommendationHtml = `
@@ -761,8 +763,9 @@
                     <li>Custom data systems (Lis Pendens-style) — $2,000+</li>
                 </ul>
                 <p style="margin-top: 16px;">
-                    <a href="#contact" class="btn btn-primary">Schedule Build Consultation</a>
+                    <a href="consultation.html?service=elite" class="btn btn-primary">Book Free Build Consultation</a>
                 </p>
+                <p style="font-size: 0.9rem; color: #64748b; margin-top: 8px;">Free 15-minute consultation to discuss your business needs and custom build options.</p>
             `;
         }
         

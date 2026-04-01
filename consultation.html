@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Book a free 15-minute consultation with AgentAICoach to discuss your AI readiness score and recommended path.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Book a Free Consultation - AgentAICoach">
+    <meta property="og:description" content="Schedule your free 15-minute AI consultation.">
+    <meta property="og:type" content="website">
+    
+    <title>Book a Free Consultation - AgentAICoach</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='15' fill='%231a365d'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='42' font-weight='bold' fill='white'%3EAI%3C/text%3E%3C/svg%3E">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="contact.css">
+    <style>
+        .consultation-hero {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        
+        .consultation-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+        
+        .consultation-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .consultation-form-section {
+            padding: 60px 0;
+            background: #f8fafc;
+        }
+        
+        .form-schedule-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 8px;
+        }
+        
+        .time-slot {
+            padding: 10px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+        
+        .time-slot:hover, .time-slot.selected {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+        
+        .time-slot input {
+            display: none;
+        }
+        
+        .form-success {
+            text-align: center;
+            padding: 60px 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .success-icon {
+            font-size: 64px;
+            color: #10b981;
+            margin-bottom: 20px;
+        }
+        
+        .form-success h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: #1a365d;
+        }
+        
+        .form-success p {
+            color: #64748b;
+            margin-bottom: 24px;
+        }
+        
+        .what-to-expect {
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .what-to-expect h2 {
+            margin-bottom: 40px;
+        }
+        
+        .expect-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .expect-item {
+            padding: 24px;
+        }
+        
+        .expect-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-schedule-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .expect-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-brand">
+                <span class="brand-icon">🤖</span>
+                <span class="brand-text">AgentAICoach</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html#services">Services</a>
+                <a href="lab.html">The Lab</a>
+                <a href="contact.html">Contact</a>
+                <a href="consultation.html" class="btn btn-outline active">Book Consultation</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="consultation-hero">
+        <div class="container">
+            <span class="section-tag" style="background: rgba(255,255,255,0.2); color: white;">Free 15-Minute Call</span>
+            <h1>Book Your Free AI Consultation</h1>
+            <p>Discuss your quiz results, get personalized recommendations, and discover the exact path to AI-powered efficiency for your real estate business.</p>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="consultation-form-section" id="book">
+        <div class="container">
+            <div class="contact-layout">
+                <div class="contact-form-wrapper">
+                    <form id="consultation-form" class="contact-form">
+                        <h2 style="margin-bottom: 8px;">Schedule Your Call</h2>
+                        <p style="color: #64748b; margin-bottom: 24px;">Fill out your details and preferred time. We'll confirm within 24 hours.</p>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" required placeholder="Your full name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required placeholder="you@example.com">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="serviceInterest">What service are you interested in? *</label>
+                            <select id="serviceInterest" name="serviceInterest" required>
+                                <option value="">Select an option</option>
+                                <option value="diy">DIY AI Course ($349) - Self-paced learning</option>
+                                <option value="guided">Guided Implementation ($1,299) - 4-week program</option>
+                                <option value="elite">Elite AI Systems - Custom automation build</option>
+                                <option value="unsure">Not sure yet - want to discuss options</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Preferred Day *</label>
+                            <input type="date" id="preferredDate" name="preferredDate" required 
+                                   min="" 
+                                   style="padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; width: 100%;">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Preferred Time (Central Time) *</label>
+                            <div class="form-schedule-options">
+                                <label class="time-slot">
+                                    <input type="radio" name="preferredTime" value="9:00 AM" required>
+                                    9:00 AM
+                                </label>
+                                <label class="time-slot">
+                                    <input type="radio" name="preferredTime" value="10:00 AM">
+                                    10:00 AM
+                                </label>
+                                <label class="time-slot">
+                                    <input type="radio" name="preferredTime" value="11:00 AM">
+                                    11:00 AM
+                                </label>
+                                <label class="time-slot">
+                                    <input type="radio" name="preferredTime" value="1:00 PM">
+                                    1:00 PM
+                                </label>
+                                <label class="time-slot">
+                                    <input type="radio" name="preferredTime" value="2:00 PM">
+                                    2:00 PM
+                                </label>
+                                <label class="time-slot">
+                                    <input type="radio" name="preferredTime" value="3:00 PM">
+                                    3:00 PM
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes">What would you like to discuss? (Optional)</label>
+                            <textarea id="notes" name="notes" rows="3" placeholder="Tell us about your situation, goals, or any specific questions..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-large btn-full">
+                            <span>Request Consultation</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+                        
+                        <p class="form-privacy">
+                            🔒 Your information is secure. We never share or sell your data.
+                        </p>
+                    </form>
+                    
+                    <!-- Success Message -->
+                    <div id="form-success" class="form-success" style="display: none;">
+                        <div class="success-icon">✓</div>
+                        <h3>Request Received!</h3>
+                        <p>We'll review your preferred time and send a confirmation email within 24 hours with your Zoom link.</p>
+                        <a href="index.html" class="btn btn-outline">Back to Home</a>
+                    </div>
+                </div>
+                
+                <!-- Info Sidebar -->
+                <div class="contact-info">
+                    <div class="info-card">
+                        <div class="info-icon">📞</div>
+                        <h3>What We'll Cover</h3>
+                        <ul style="text-align: left; margin-top: 12px; padding-left: 20px;">
+                            <li>Review your quiz results</li>
+                            <li>Discuss your specific goals</li>
+                            <li>Recommend the right service</li>
+                            <li>Answer your questions</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">⏰</div>
+                        <h3>Available Times</h3>
+                        <p><strong>Mon-Fri:</strong> 9 AM - 4 PM CT</p>
+                        <p class="info-note">Consultations last ~15 minutes</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">💡</div>
+                        <h3>Not Taken the Quiz?</h3>
+                        <p>Get your personalized recommendation first.</p>
+                        <a href="index.html#quiz" class="btn btn-outline btn-small" style="margin-top: 12px;">Take the Quiz</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What to Expect -->
+    <section class="what-to-expect">
+        <div class="container">
+            <span class="section-tag">The Process</span>
+            <h2>What to Expect</h2>
+            <div class="expect-grid">
+                <div class="expect-item">
+                    <div class="expect-icon">1️⃣</div>
+                    <h3>Submit Request</h3>
+                    <p>Pick your preferred day and time. We'll get back to you within 24 hours.</p>
+                </div>
+                <div class="expect-item">
+                    <div class="expect-icon">2️⃣</div>
+                    <h3>Get Confirmed</h3>
+                    <p>Receive a confirmation email with your Zoom link and calendar invite.</p>
+                </div>
+                <div class="expect-item">
+                    <div class="expect-icon">3️⃣</div>
+                    <h3>Join the Call</h3>
+                    <p>15-minute focused conversation about your AI readiness and next steps.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="brand-link">
+                        <span class="brand-icon">🤖</span>
+                        <span class="brand-text">AgentAICoach</span>
+                    </a>
+                    <p>Active agents using AI daily. We don't teach theory — we teach the exact systems we use.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="index.html#services">DIY AI Course</a></li>
+                            <li><a href="index.html#services">Guided Implementation</a></li>
+                            <li><a href="index.html#services">Elite AI Systems</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="index.html#quiz">AI Proficiency Quiz</a></li>
+                            <li><a href="lab.html">The Lab</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 AgentAICoach. Built by active agents.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set minimum date to tomorrow
+        const dateInput = document.getElementById('preferredDate');
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        dateInput.min = tomorrow.toISOString().split('T')[0];
+        
+        // Time slot selection
+        document.querySelectorAll('.time-slot').forEach(slot => {
+            slot.addEventListener('click', function() {
+                document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+                this.classList.add('selected');
+                this.querySelector('input').checked = true;
+            });
+        });
+        
+        // Form submission
+        document.getElementById('consultation-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span>Submitting...</span>';
+            
+            const formData = {
+                formType: 'consultation',
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                serviceInterest: document.getElementById('serviceInterest').value,
+                preferredDate: document.getElementById('preferredDate').value,
+                preferredTime: document.querySelector('input[name="preferredTime"]:checked').value,
+                notes: document.getElementById('notes').value
+            };
+            
+            try {
+                // Send to Google Apps Script
+                const response = await fetch('YOUR_GOOGLE_SCRIPT_URL', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                
+                document.getElementById('consultation-form').style.display = 'none';
+                document.getElementById('form-success').style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error submitting. Please try again or email us at my850@agentmail.to');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span>Request Consultation</span><span class="btn-arrow">→</span>';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,252 +1,220 @@
 /**
- * Google Apps Script for AgentAICoach Form Submissions
- * 
- * This script receives webhook data from both quiz and contact forms
- * and writes them to the "AI Coach Form Submissions" sheet.
- * 
- * FPL Form Submissions remains untouched for existing forms.
- * 
- * Setup Instructions:
- * 1. Open your "Sherlock Data" Google Sheet  
- * 2. Extensions → Apps Script
- * 3. Delete existing code and paste this entire script
- * 4. Save and deploy as Web App (see below)
- * 5. The script will auto-create headers on first submission
- * 6. Update quiz.js and contact.js with the deployed URL
- * 
- * Deployment:
- * 1. Click Deploy → New deployment
- * 2. Type: Web app
- * 3. Execute as: Me
- * 4. Who has access: Anyone
- * 5. Click Deploy
- * 6. Copy the Web App URL
- * 7. Update quiz.js and contact.js with this URL
+ * AgentAICoach Google Apps Script - Web App
+ * Handles: Quiz submissions, Contact forms, Consultation bookings
+ * Emails: lars@my850.com, luis@my850.com on every submission
+ * Stores: Google Sheets for all data
  */
 
-// ============================================
-// MAIN HANDLER
-// ============================================
+const SHEET_ID = 'YOUR_SHEET_ID_HERE'; // Replace with your Google Sheet ID
+const EMAIL_RECIPIENTS = ['lars@my850.com', 'luis@my850.com'];
+const FROM_EMAIL = 'my850@agentmail.to';
 
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
+    const sheet = SpreadsheetApp.openById(SHEET_ID);
     
-    // Determine submission type
-    if (data.leadData && data.answers && typeof data.totalScore !== 'undefined') {
-      return handleQuizSubmission(data);
-    } else if (data.source === 'contact-form') {
-      return handleContactSubmission(data);
-    } else {
-      return jsonResponse({
-        success: false,
-        error: 'Unknown submission type'
-      });
+    // Route based on form type
+    if (data.formType === 'quiz') {
+      return handleQuizSubmission(sheet, data);
+    } else if (data.formType === 'contact') {
+      return handleContactSubmission(sheet, data);
+    } else if (data.formType === 'consultation') {
+      return handleConsultationSubmission(sheet, data);
     }
+    
+    return ContentService.createTextOutput(JSON.stringify({
+      status: 'error',
+      message: 'Unknown form type'
+    })).setMimeType(ContentService.MimeType.JSON);
+    
   } catch (error) {
-    console.error('Error:', error);
-    return jsonResponse({
-      success: false,
-      error: error.toString()
-    });
+    return ContentService.createTextOutput(JSON.stringify({
+      status: 'error',
+      message: error.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
   }
 }
 
-function doGet(e) {
-  return jsonResponse({
-    status: 'OK',
-    message: 'AgentAICoach form endpoint is running'
-  });
-}
-
-// ============================================
-// QUIZ SUBMISSION HANDLER
-// ============================================
-
-function handleQuizSubmission(data) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const SHEET_NAME = 'AI Coach Form Submissions';
-  let sheet = ss.getSheetByName(SHEET_NAME);
+function handleQuizSubmission(sheet, data) {
+  // Quiz results sheet
+  const quizSheet = sheet.getSheetByName('Quiz Results') || sheet.insertSheet('Quiz Results');
   
-  // Create sheet if doesn't exist
-  if (!sheet) {
-    sheet = ss.insertSheet(SHEET_NAME);
-    setupHeaders(sheet);
+  // Headers if first row
+  if (quizSheet.getLastRow() === 0) {
+    quizSheet.appendRow([
+      'Timestamp', 'Email', 'Total Score', 'Category', 'DIY Course Interest', 'Coaching Interest', 'Custom Interest',
+      'Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8', 'Q9', 'Q10',
+      'Q11', 'Q12', 'Q13', 'Q14', 'Q15', 'Q16', 'Q17', 'Q18', 'Q19', 'Q20',
+      'UTM Source', 'UTM Medium', 'UTM Campaign', 'Page URL'
+    ]);
   }
   
-  // Check if we need quiz headers
-  const existingHeaders = sheet.getRange(1, 1, 1, 32).getValues()[0];
-  if (!existingHeaders[0]) {
-    setupHeaders(sheet);
-  }
-  
-  const leadData = data.leadData;
-  const answers = data.answers || {};
-  
-  // Get answer text if provided (new format), otherwise just display score
-  function getAnswerDisplay(answerData) {
-    if (!answerData) return '';
-    // If new format with text: {score: 5, text: "Daily workflow"}
-    if (typeof answerData === 'object' && answerData.text) {
-      return `${answerData.score} - ${answerData.text}`;
-    }
-    // Old format: just number
-    return answerData;
-  }
-  
-  const row = [
-    leadData.timestamp || new Date().toISOString(),
-    'Quiz',
-    '', // First Name
-    '', // Last Name
-    leadData.email,
-    data.totalScore,
-    data.category || '',
-    // Q1-Q20 (display as "Score - Answer Text")
-    getAnswerDisplay(answers[1]), getAnswerDisplay(answers[2]), getAnswerDisplay(answers[3]), getAnswerDisplay(answers[4]), getAnswerDisplay(answers[5]),
-    getAnswerDisplay(answers[6]), getAnswerDisplay(answers[7]), getAnswerDisplay(answers[8]), getAnswerDisplay(answers[9]), getAnswerDisplay(answers[10]),
-    getAnswerDisplay(answers[11]), getAnswerDisplay(answers[12]), getAnswerDisplay(answers[13]), getAnswerDisplay(answers[14]), getAnswerDisplay(answers[15]),
-    getAnswerDisplay(answers[16]), getAnswerDisplay(answers[17]), getAnswerDisplay(answers[18]), getAnswerDisplay(answers[19]), getAnswerDisplay(answers[20]),
-    leadData.utm_source || '',
-    leadData.utm_medium || '',
-    leadData.utm_campaign || '',
-    '', // Interest
-    '', // Message
-    leadData.pageUrl || ''
-  ];
-  
-  sheet.appendRow(row);
-  
-  return jsonResponse({
-    success: true,
-    message: 'Quiz recorded',
-    score: data.totalScore,
-    category: data.category
-  });
-}
-
-// ============================================
-// CONTACT FORM HANDLER
-// ============================================
-
-function handleContactSubmission(data) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const SHEET_NAME = 'AI Coach Form Submissions';
-  let sheet = ss.getSheetByName(SHEET_NAME);
-  
-  if (!sheet) {
-    sheet = ss.insertSheet(SHEET_NAME);
-    setupHeaders(sheet);
-  }
-  
-  // Check if we need headers
-  const existingHeaders = sheet.getRange(1, 1, 1, 32).getValues()[0];
-  if (!existingHeaders[0]) {
-    setupHeaders(sheet);
-  }
-  
-  const row = [
-    data.timestamp || new Date().toISOString(),
-    'Contact',
-    data.firstName || '',
-    data.lastName || '',
+  // Add row
+  quizSheet.appendRow([
+    new Date(),
     data.email,
-    '', // Score
-    '', // Category
-    // Q1-Q20 (blank for contact forms)
-    '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
-    '', // UTM Source
-    '', // UTM Medium  
-    '', // UTM Campaign
-    data.interest || '',
-    data.message || '',
+    data.totalScore,
+    data.category,
+    data.recommendations?.diy ? 'Yes' : 'No',
+    data.recommendations?.coaching ? 'Yes' : 'No',
+    data.recommendations?.custom ? 'Yes' : 'No',
+    ...data.answers,
+    data.utmParams?.utm_source || '',
+    data.utmParams?.utm_medium || '',
+    data.utmParams?.utm_campaign || '',
     data.pageUrl || ''
-  ];
+  ]);
   
-  sheet.appendRow(row);
+  // Send notification email
+  const emailBody = `
+NEW QUIZ SUBMISSION
+=================
+
+Email: ${data.email}
+Score: ${data.totalScore}/100
+Category: ${data.category}
+Timestamp: ${new Date().toLocaleString()}
+
+RECOMMENDED PATHS:
+- DIY Course: ${data.recommendations?.diy ? 'YES' : 'No'}
+- Guided Implementation: ${data.recommendations?.coaching ? 'YES' : 'No'}
+- Elite Systems: ${data.recommendations?.custom ? 'YES' : 'No'}
+
+ANSWERS:
+${Object.entries(data.answers).map(([q, a]) => `Q${q}: ${a}`).join('\n')}
+
+View in Google Sheets: https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit
+  `;
   
-  return jsonResponse({
-    success: true,
-    message: 'Contact recorded'
+  EMAIL_RECIPIENTS.forEach(recipient => {
+    MailApp.sendEmail({
+      to: recipient,
+      from: FROM_EMAIL,
+      subject: `🎯 New Quiz: ${data.category} (${data.totalScore}/100)`,
+      body: emailBody
+    });
   });
+  
+  return ContentService.createTextOutput(JSON.stringify({
+    status: 'success',
+    message: 'Quiz submitted successfully'
+  })).setMimeType(ContentService.MimeType.JSON);
 }
 
-// ============================================
-// SHEET SETUP
-// ============================================
+function handleContactSubmission(sheet, data) {
+  // Contact submissions sheet
+  const contactSheet = sheet.getSheetByName('Contact Submissions') || sheet.insertSheet('Contact Submissions');
+  
+  if (contactSheet.getLastRow() === 0) {
+    contactSheet.appendRow(['Timestamp', 'First Name', 'Last Name', 'Email', 'Phone', 'Interest', 'Role', 'Message']);
+  }
+  
+  contactSheet.appendRow([
+    new Date(),
+    data.firstName,
+    data.lastName,
+    data.email,
+    data.phone,
+    data.interest,
+    data.role,
+    data.message
+  ]);
+  
+  // Send email notification
+  const emailBody = `
+NEW CONTACT FORM SUBMISSION
+===========================
 
-function setupHeaders(sheet) {
-  const headers = [
-    'Timestamp',
-    'Source',
-    'FirstName',
-    'LastName', 
-    'Email',
-    'Score',
-    'Category',
-    'Q1', 'Q2', 'Q3', 'Q4', 'Q5',
-    'Q6', 'Q7', 'Q8', 'Q9', 'Q10',
-    'Q11', 'Q12', 'Q13', 'Q14', 'Q15',
-    'Q16', 'Q17', 'Q18', 'Q19', 'Q20',
-    'UTM_Source',
-    'UTM_Medium',
-    'UTM_Campaign',
-    'Interest',
-    'Message',
-    'Page_URL'
-  ];
+Name: ${data.firstName} ${data.lastName}
+Email: ${data.email}
+Phone: ${data.phone}
+Interest: ${data.interest}
+Role: ${data.role}
+Message:
+${data.message}
+
+View in Google Sheets: https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit
+  `;
   
-  sheet.appendRow(headers);
+  EMAIL_RECIPIENTS.forEach(recipient => {
+    MailApp.sendEmail({
+      to: recipient,
+      from: FROM_EMAIL,
+      subject: `📧 New Contact: ${data.firstName} ${data.lastName} - ${data.interest}`,
+      body: emailBody
+    });
+  });
   
-  // Format header row
-  const headerRange = sheet.getRange(1, 1, 1, headers.length);
-  headerRange.setFontWeight('bold');
-  headerRange.setBackground('#1a365d');
-  headerRange.setFontColor('#ffffff');
+  return ContentService.createTextOutput(JSON.stringify({
+    status: 'success',
+    message: 'Contact form submitted successfully'
+  })).setMimeType(ContentService.MimeType.JSON);
 }
 
-// ============================================
-// UTILITIES
-// ============================================
+function handleConsultationSubmission(sheet, data) {
+  // Consultation bookings sheet
+  const consultSheet = sheet.getSheetByName('Consultation Bookings') || sheet.insertSheet('Consultation Bookings');
+  
+  if (consultSheet.getLastRow() === 0) {
+    consultSheet.appendRow(['Timestamp', 'Name', 'Email', 'Phone', 'Preferred Date', 'Preferred Time', 'Service Interest', 'Notes', 'Status']);
+  }
+  
+  consultSheet.appendRow([
+    new Date(),
+    data.name,
+    data.email,
+    data.phone,
+    data.preferredDate,
+    data.preferredTime,
+    data.serviceInterest,
+    data.notes,
+    'PENDING'
+  ]);
+  
+  // Send email notification
+  const emailBody = `
+NEW CONSULTATION REQUEST
+========================
 
-function jsonResponse(data) {
-  return ContentService.createTextOutput(JSON.stringify(data))
-    .setMimeType(ContentService.MimeType.JSON);
+Name: ${data.name}
+Email: ${data.email}
+Phone: ${data.phone}
+
+PREFERRED SCHEDULE:
+Date: ${data.preferredDate}
+Time: ${data.preferredTime}
+
+SERVICE INTEREST: ${data.serviceInterest}
+
+NOTES:
+${data.notes}
+
+ACTION REQUIRED:
+Confirm booking and send calendar invite to ${data.email}
+
+View in Google Sheets: https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit
+  `;
+  
+  EMAIL_RECIPIENTS.forEach(recipient => {
+    MailApp.sendEmail({
+      to: recipient,
+      from: FROM_EMAIL,
+      subject: `📅 BOOK CONSULTATION: ${data.name} - ${data.preferredDate} @ ${data.preferredTime}`,
+      body: emailBody
+    });
+  });
+  
+  return ContentService.createTextOutput(JSON.stringify({
+    status: 'success',
+    message: 'Consultation request submitted successfully'
+  })).setMimeType(ContentService.MimeType.JSON);
 }
 
-// Test functions (run manually in Apps Script editor)
-function testQuiz() {
-  const testData = {
-    leadData: {
-      email: 'test@example.com',
-      timestamp: new Date().toISOString(),
-      pageUrl: 'https://agentaicoach.com/',
-      utm_source: 'google',
-      utm_medium: 'organic'
-    },
-    answers: { 1: 5, 2: 4, 3: 3, 4: 4, 5: 5 },
-    totalScore: 65,
-    category: 'AI Active User'
-  };
-  
-  const result = handleQuizSubmission(testData);
-  console.log('Quiz result:', result.getContent());
-}
-
-function testContact() {
-  const testData = {
-    timestamp: new Date().toISOString(),
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john@example.com',
-    phone: '(555) 123-4567',
-    interest: 'coaching',
-    role: 'agent',
-    message: 'Interested in private coaching for my team.',
-    pageUrl: 'https://agentaicoach.com/contact.html',
-    source: 'contact-form'
-  };
-  
-  const result = handleContactSubmission(testData);
-  console.log('Contact result:', result.getContent());
+// For testing
+function doGet(e) {
+  return ContentService.createTextOutput(JSON.stringify({
+    status: 'ok',
+    message: 'AgentAICoach Web App is running'
+  })).setMimeType(ContentService.MimeType.JSON);
 }
