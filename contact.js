@@ -71,7 +71,6 @@
             email: formData.get('email'),
             phone: formData.get('phone') || '',
             interest: formData.get('interest'),
-            role: formData.get('role') || '',
             message: formData.get('message'),
             pageUrl: window.location.href
         };

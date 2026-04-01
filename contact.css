@@ -96,6 +96,27 @@
     box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
 }
 
+/* Validation states - prevent default browser styling */
+.contact-form input:invalid,
+.contact-form select:invalid,
+.contact-form textarea:invalid {
+    border-color: var(--border);
+    box-shadow: none;
+}
+
+.contact-form input:invalid:not(:placeholder-shown),
+.contact-form select:invalid:not(:placeholder-shown) {
+    border-color: var(--border);
+}
+
+/* Only show invalid state after user interaction */
+.contact-form input.user-invalid,
+.contact-form select.user-invalid,
+.contact-form textarea.user-invalid {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+}
+
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
     color: var(--text-muted);
