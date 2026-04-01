@@ -5,14 +5,16 @@
  * Stores: Google Sheets for all data
  */
 
-const SHEET_ID = 'YOUR_SHEET_ID_HERE'; // Replace with your Google Sheet ID
+const SHEET_NAME = 'Sherlock Data'; // Your existing sheet
+const TAB_NAME = 'AI Coach Form Submissions'; // Your existing tab
 const EMAIL_RECIPIENTS = ['lars@my850.com', 'luis@my850.com'];
 const FROM_EMAIL = 'my850@agentmail.to';
 
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
-    const sheet = SpreadsheetApp.openById(SHEET_ID);
+    // Use active spreadsheet (the one this script is bound to - Sherlock Data)
+    const sheet = SpreadsheetApp.getActiveSpreadsheet();
     
     // Route based on form type
     if (data.formType === 'quiz') {
