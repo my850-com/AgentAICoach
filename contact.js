@@ -11,9 +11,8 @@
     // CONFIGURATION
     // ============================================
     
-    // Google Apps Script Web App URL for contact form
-    // Replace with your actual script URL after deploying
-    const CONTACT_FORM_URL = 'https://script.google.com/macros/s/AKfycbwGCC8V_KBncAGhIx_MRdKjm-jLbSskayCBR50Os84BYnAD6IxBJBP74q-qcT7MqY3L/exec';
+    // Google Apps Script Web App URL (shared across all forms)
+    const CONTACT_FORM_URL = 'https://script.google.com/macros/s/AKfycbxHYhH891nT-dtEOzH3yTWFcB4cZxeOJ_NshkTw-_UFb6ED1NPMXo7aRjBLTkw_guGW/exec';
 
     // ============================================
     // DOM ELEMENTS
@@ -65,6 +64,7 @@
         
         const formData = new FormData(elements.form);
         const data = {
+            formType: 'contact',
             timestamp: new Date().toISOString(),
             firstName: formData.get('firstName'),
             lastName: formData.get('lastName'),
@@ -73,7 +73,6 @@
             interest: formData.get('interest'),
             role: formData.get('role') || '',
             message: formData.get('message'),
-            source: 'contact-form',
             pageUrl: window.location.href
         };
         

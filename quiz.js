@@ -355,8 +355,7 @@
     // Update this URL with your deployed Apps Script web app URL
     // ============================================
     
-    const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwGCC8V_KBncAGhIx_MRdKjm-jLbSskayCBR50Os84BYnAD6IxBJBP74q-qcT7MqY3L/exec';
-    // ^^^ REPLACE THIS WITH YOUR ACTUAL GOOGLE APPS SCRIPT URL AFTER DEPLOYMENT
+    const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxHYhH891nT-dtEOzH3yTWFcB4cZxeOJ_NshkTw-_UFb6ED1NPMXo7aRjBLTkw_guGW/exec';
 
     // ============================================
     // QUIZ STATE
