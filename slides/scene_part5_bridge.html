@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 5 - The Bridge</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            width: 1920px; height: 1080px;
+            background: linear-gradient(135deg, #1e3a5f 0%, #0f2744 50%, #1a365d 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            position: relative; overflow: hidden;
+        }
+        /* Three option cards */
+        .options-container {
+            display: flex; gap: 40px;
+            justify-content: center; margin-top: 60px;
+            z-index: 10;
+        }
+        .option-card {
+            width: 320px; height: 450px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px; padding: 35px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            display: flex; flex-direction: column;
+            transition: all 0.3s ease;
+        }
+        .option-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(6, 182, 212, 0.5);
+        }
+        .option-card.popular {
+            border-color: #06b6d4;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(6, 182, 212, 0.05));
+            transform: scale(1.05);
+        }
+        .option-card.popular::before {
+            content: "MOST POPULAR";
+            position: absolute; top: -12px; left: 50%;
+            transform: translateX(-50%);
+            background: #06b6d4; color: white;
+            padding: 6px 20px; border-radius: 20px;
+            font-size: 11px; font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .option-header { position: relative; }
+        .option-number {
+            font-size: 14px; font-weight: 600;
+            color: #94a3b8; text-transform: uppercase;
+            letter-spacing: 2px; margin-bottom: 10px;
+        }
+        .option-title {
+            font-size: 28px; font-weight: 700;
+            color: white; margin-bottom: 15px;
+        }
+        .option-price {
+            font-size: 36px; font-weight: 800;
+            color: #06b6d4; font-family: monospace;
+        }
+        .option-price span {
+            font-size: 16px; color: #94a3b8;
+            font-weight: 400; font-family: sans-serif;
+        }
+        .option-features {
+            list-style: none; flex-grow: 1;
+            margin-top: 25px;
+        }
+        .option-features li {
+            color: #cbd5e1; font-size: 15px;
+            margin-bottom: 12px; padding-left: 20px;
+            position: relative;
+        }
+        .option-features li::before {
+            content: "→"; position: absolute; left: 0;
+            color: #06b6d4; font-weight: bold;
+        }
+        /* Main content */
+        .content { text-align: center; z-index: 10; }
+        .section-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white; padding: 12px 30px;
+            border-radius: 50px; font-size: 14px;
+            font-weight: 600; letter-spacing: 3px;
+            text-transform: uppercase; margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+        }
+        .main-title {
+            font-size: 72px; font-weight: 700;
+            color: white; letter-spacing: -1px;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        .subtitle {
+            font-size: 22px; color: #86efac;
+            margin-top: 10px;
+        }
+        .timer {
+            display: flex; align-items: center;
+            justify-content: center; gap: 15px;
+            margin-top: 60px; padding: 20px 40px;
+            background: rgba(34, 197, 94, 0.15);
+            border-radius: 12px;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        .timer-icon {
+            width: 24px; height: 24px;
+            background: #22c55e; border-radius: 50%;
+            display: flex; align-items: center;
+            justify-content: center; animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .timer-text { color: #86efac; font-size: 18px; }
+        .timer-duration { color: #4ade80; font-weight: 700; }
+        .progress-container {
+            position: absolute; bottom: 0; left: 0;
+            width: 100%; height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .progress-bar { height: 100%;
+            background: linear-gradient(90deg, #22c55e, #86efac);
+            width: 100%; transition: width 0.5s ease;
+        }
+        .brand-corner {
+            position: absolute; top: 40px; left: 60px;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .brand-emoji { font-size: 24px; }
+        .brand-text { color: white; font-size: 16px; font-weight: 600; }
+        .episode-badge {
+            position: absolute; top: 40px; right: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white; padding: 10px 20px;
+            border-radius: 8px; font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="brand-corner">
+        <span class="brand-emoji">🤖</span>
+        <span class="brand-text">AgentAICoach</span>
+    </div>
+    <div class="episode-badge">$47 Entry Session</div>
+
+    <div class="content">
+        <div class="section-badge">Part 5</div>
+        <h1 class="main-title">YOUR PATH FORWARD</h1>
+        <p class="subtitle">Three choices. Pick what works for you.</p>
+    </div>
+
+    <div class="options-container">
+        <!-- Option 1 -->
+        <div class="option-card">
+            <div class="option-header">
+                <div class="option-number">Option 1</div>
+                <div class="option-title">DIY</div>
+                <div class="option-price">$47-67</div>
+            </div>
+            <ul class="option-features">
+                <li>Everything you saw today</li>
+                <li>Prompt templates included</li>
+                <li>Self-paced implementation</li>
+                <li>For the tinkerers</li>
+            </ul>
+        </div>
+
+        <!-- Option 2 -->
+        <div class="option-card popular">
+            <div class="option-header">
+                <div class="option-number">Option 2</div>
+                <div class="option-title">Guided Build</div>
+                <div class="option-price">$1,299</div>
+            </div>
+            <ul class="option-features">
+                <li>4-week program</li>
+                <li>Live Zoom sessions</li>
+                <li>Customized for YOUR voice</li>
+                <li>Private group access</li>
+            </ul>
+        </div>
+
+        <!-- Option 3 -->
+        <div class="option-card">
+            <div class="option-header">
+                <div class="option-number">Option 3</div>
+                <div class="option-title">Done For You</div>
+                <div class="option-price">$500+ <span>modular</span></div>
+            </div>
+            <ul class="option-features">
+                <li>Full system audit</li>
+                <li>Custom automation builds</li>
+                <li>Pick your modules</li>
+                <li>You sell, we build</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="timer">
+        <div class="timer-icon"></div>
+        <span class="timer-text">Make your choice · <span class="timer-duration">40:00 – 45:00</span></span>
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 4 - The Math</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            width: 1920px; height: 1080px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            position: relative; overflow: hidden;
+        }
+        /* Animated grid background */
+        .grid {
+            position: absolute;
+            width: 200%; height: 200%;
+            background-image: 
+                linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: pan 20s linear infinite;
+        }
+        @keyframes pan {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50px, -50px); }
+        }
+        /* Calculator style numbers */
+        .calc-column {
+            position: absolute; top: 100px;
+            display: flex; flex-direction: column;
+            gap: 30px; width: 400px;
+        }
+        .calc-column.left { left: 150px; }
+        .calc-column.left .calc-box { border-color: #ef4444; }
+        .calc-column.right { right: 150px; }
+        .calc-column.right .calc-box { border-color: #22c55e; }
+        
+        .calc-box {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px; padding: 25px;
+            border-left: 4px solid;
+            backdrop-filter: blur(10px);
+        }
+        .calc-label {
+            color: #94a3b8; font-size: 13px;
+            text-transform: uppercase; letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+        .calc-value {
+            color: white; font-size: 32px;
+            font-weight: 700; font-family: monospace;
+        }
+        .calc-value.red { color: #ef4444; }
+        .calc-value.green { color: #22c55e; }
+        
+        /* Main content */
+        .content { text-align: center; z-index: 10; }
+        .section-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white; padding: 12px 30px;
+            border-radius: 50px; font-size: 14px;
+            font-weight: 600; letter-spacing: 3px;
+            text-transform: uppercase; margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+        }
+        .main-title {
+            font-size: 90px; font-weight: 800;
+            color: white; letter-spacing: -2px;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+        .subtitle {
+            font-size: 28px; color: #fcd34d;
+            font-weight: 400; max-width: 600px;
+            line-height: 1.4; margin: 0 auto 40px;
+        }
+        .big-number {
+            font-size: 120px; font-weight: 900;
+            color: #22c55e; font-family: monospace;
+            text-shadow: 0 0 60px rgba(34, 197, 94, 0.5);
+            animation: glow 2s ease-in-out infinite;
+        }
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 60px rgba(34, 197, 94, 0.5); }
+            50% { text-shadow: 0 0 80px rgba(34, 197, 94, 0.8); }
+        }
+        .big-label {
+            color: #86efac; font-size: 24px;
+            text-transform: uppercase; letter-spacing: 3px;
+            margin-top: 10px;
+        }
+        .timer {
+            display: flex; align-items: center;
+            justify-content: center; gap: 15px;
+            margin-top: 50px; padding: 20px 40px;
+            background: rgba(245, 158, 11, 0.15);
+            border-radius: 12px;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        .timer-text { color: #fde68a; font-size: 18px; }
+        .timer-duration { color: #fbbf24; font-weight: 700; }
+        .progress-container {
+            position: absolute; bottom: 0; left: 0;
+            width: 100%; height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .progress-bar { height: 100%;
+            background: linear-gradient(90deg, #f59e0b, #fcd34d);
+            width: 89%; transition: width 0.5s ease;
+        }
+        .brand-corner {
+            position: absolute; top: 40px; left: 60px;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .brand-emoji { font-size: 24px; }
+        .brand-text { color: white; font-size: 16px; font-weight: 600; }
+        .episode-badge {
+            position: absolute; top: 40px; right: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white; padding: 10px 20px;
+            border-radius: 8px; font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid"></div>
+
+    <div class="calc-column left">
+        <div class="calc-box">
+            <div class="calc-label">Leads Lost / Month</div>
+            <div class="calc-value red">12</div>
+        </div>
+        <div class="calc-box">
+            <div class="calc-label">Annual Loss</div>
+            <div class="calc-value red">144 leads</div>
+        </div>
+        <div class="calc-box">
+            <div class="calc-label">Commissions Gone</div>
+            <div class="calc-value red">$43,500</div>
+        </div>
+    </div>
+
+    <div class="calc-column right">
+        <div class="calc-box">
+            <div class="calc-label">Leads Automated</div>
+            <div class="calc-value green">15 / month</div>
+        </div>
+        <div class="calc-box">
+            <div class="calc-label">Extra Appointments</div>
+            <div class="calc-value green">4-6 / month</div>
+        </div>
+        <div class="calc-box">
+            <div class="calc-label">Additional Closings</div>
+            <div class="calc-value green">3-6 / year</div>
+        </div>
+    </div>
+
+    <div class="brand-corner">
+        <span class="brand-emoji">🤖</span>
+        <span class="brand-text">AgentAICoach</span>
+    </div>
+    <div class="episode-badge">$47 Entry Session</div>
+
+    <div class="content">
+        <div class="section-badge">Part 4</div>
+        <h1 class="main-title">THE ROI</h1>
+        <p class="subtitle">This pays for itself on the first extra closing</p>
+        
+        <div class="big-number">$22k – $45k</div>
+        <div class="big-label">Additional Annual Commissions</div>
+
+        <div class="timer">
+            <span class="timer-text">Compounding every year · <span class="timer-duration">35:00 – 40:00</span></span>
+        </div>
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+</body>
+</html>

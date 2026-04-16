@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 45-Minute AI Follow-Up System - Scene Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1920px;
+            height: 1080px;
+            background: linear-gradient(135deg, #1a365d 0%, #0f2744 50%, #1a365d 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated accent lines */
+        .accent-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent 0%, #06b6d4 50%, transparent 100%);
+            height: 2px;
+            width: 100%;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        .accent-line.top {
+            top: 100px;
+            animation-delay: 0s;
+        }
+
+        .accent-line.bottom {
+            bottom: 100px;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes shimmer {
+            0% { opacity: 0.3; transform: translateX(-100%); }
+            50% { opacity: 1; transform: translateX(0%); }
+            100% { opacity: 0.3; transform: translateX(100%); }
+        }
+
+        /* Main content container */
+        .content {
+            text-align: center;
+            z-index: 10;
+        }
+
+        /* Section number badge */
+        .section-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(6, 182, 212, 0.4);
+        }
+
+        /* Main title */
+        .main-title {
+            font-size: 72px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Subtitle */
+        .subtitle {
+            font-size: 28px;
+            color: #67e8f9;
+            font-weight: 400;
+            max-width: 800px;
+            line-height: 1.4;
+            margin: 0 auto;
+        }
+
+        /* Timer indicator */
+        .timer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 60px;
+            padding: 20px 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .timer-icon {
+            width: 24px;
+            height: 24px;
+            background: #06b6d4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .timer-text {
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .timer-duration {
+            color: #06b6d4;
+            font-weight: 700;
+        }
+
+        /* Progress bar at bottom */
+        .progress-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #06b6d4, #67e8f9);
+            width: 25%; /* This updates per section */
+            transition: width 0.5s ease;
+        }
+
+        /* Corner branding */
+        .brand-corner {
+            position: absolute;
+            top: 40px;
+            left: 60px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-emoji {
+            font-size: 24px;
+        }
+
+        .brand-text {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Episode number */
+        .episode-badge {
+            position: absolute;
+            top: 40px;
+            right: 60px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Animation for text entry */
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.2s; }
+        .fade-in:nth-child(2) { animation-delay: 0.4s; }
+        .fade-in:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated accent lines -->
+    <div class="accent-line top"></div>
+    <div class="accent-line bottom"></div>
+
+    <!-- Brand corner -->
+    <div class="brand-corner">
+        <span class="brand-emoji">🤖</span>
+        <span class="brand-text">AgentAICoach</span>
+    </div>
+
+    <!-- Episode badge -->
+    <div class="episode-badge">$47 Entry Session</div>
+
+    <!-- Main content -->
+    <div class="content">
+        <div class="section-badge fade-in">Part 3</div>
+        <h1 class="main-title fade-in">THE LIVE BUILD</h1>
+        <p class="subtitle fade-in">Step-by-step automation that catches leads while you sleep</p>
+        
+        <div class="timer">
+            <div class="timer-icon"></div>
+            <span class="timer-text">Recording now · <span class="timer-duration">10:00 – 35:00</span></span>
+        </div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+
+    <script>
+        // Simple click handler to demonstrate interactivity
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.timer')) {
+                alert('This scene runs from 10:00 to 35:00 in the full presentation.\n\nKey moments:\n• 12:00 – Setting up the trigger\n• 18:00 – Configuring the AI brain\n• 28:00 – Calendar integration\n• 32:00 – Safety net automation');
+            }
+        });
+    </script>
+</body>
+</html>

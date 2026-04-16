@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 1 - The Daily Grind</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            width: 1920px; height: 1080px;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #1e293b 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            position: relative; overflow: hidden;
+        }
+        /* Money/commission counter animation */
+        .counter-container {
+            position: absolute; top: 100px;
+            display: flex; flex-direction: column;
+            align-items: center; gap: 20px;
+        }
+        .counter-label {
+            color: #94a3b8; font-size: 14px;
+            text-transform: uppercase; letter-spacing: 4px;
+        }
+        .counter-value {
+            font-size: 48px; font-weight: 700;
+            color: #ef4444; font-family: monospace;
+        }
+        .counter-value::before {
+            content: "$162,000";
+            animation: countUp 4s ease-out forwards;
+        }
+        @keyframes countUp {
+            0% { content: "$0"; }
+            20% { content: "$32,400"; }
+            40% { content: "$64,800"; }
+            60% { content: "$97,200"; }
+            80% { content: "$129,600"; }
+            100% { content: "$162,000"; }
+        }
+        /* Animated warning rings */
+        .warning-ring {
+            position: absolute;
+            border: 2px solid rgba(239, 68, 68, 0.3);
+            border-radius: 50%;
+            animation: expand 3s ease-out infinite;
+        }
+        .warning-ring:nth-child(1) {
+            width: 300px; height: 300px;
+            animation-delay: 0s;
+        }
+        .warning-ring:nth-child(2) {
+            width: 500px; height: 500px;
+            animation-delay: 0.5s;
+        }
+        .warning-ring:nth-child(3) {
+            width: 700px; height: 700px;
+            animation-delay: 1s;
+        }
+        @keyframes expand {
+            0% { transform: scale(0.5); opacity: 0.8; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        /* Main content */
+        .content { text-align: center; z-index: 10; }
+        .section-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white; padding: 12px 30px;
+            border-radius: 50px; font-size: 14px;
+            font-weight: 600; letter-spacing: 3px;
+            text-transform: uppercase; margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4);
+        }
+        .main-title {
+            font-size: 84px; font-weight: 800;
+            color: white; letter-spacing: -2px;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+        .subtitle {
+            font-size: 24px; color: #fca5a5;
+            font-weight: 400; max-width: 700px;
+            line-height: 1.5; margin: 0 auto;
+        }
+        .timer {
+            display: flex; align-items: center;
+            justify-content: center; gap: 15px;
+            margin-top: 60px; padding: 20px 40px;
+            background: rgba(239, 68, 68, 0.15);
+            border-radius: 12px; border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .timer-icon {
+            width: 20px; height: 20px;
+            background: #ef4444; border-radius: 50%;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .timer-text { color: #fca5a5; font-size: 18px; }
+        .timer-duration { color: #ef4444; font-weight: 700; }
+        .progress-container {
+            position: absolute; bottom: 0; left: 0;
+            width: 100%; height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .progress-bar { height: 100%;
+            background: linear-gradient(90deg, #ef4444, #fca5a5);
+            width: 11%; transition: width 0.5s ease;
+        }
+        .brand-corner {
+            position: absolute; top: 40px; left: 60px;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .brand-emoji { font-size: 24px; }
+        .brand-text { color: white; font-size: 16px; font-weight: 600; }
+        .episode-badge {
+            position: absolute; top: 40px; right: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white; padding: 10px 20px;
+            border-radius: 8px; font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="warning-ring"></div>
+    <div class="warning-ring"></div>
+    <div class="warning-ring"></div>
+    
+    <div class="counter-container">
+        <div class="counter-label">Commissions Lost This Year</div>
+        <div class="counter-value"></div>
+    </div>
+
+    <div class="brand-corner">
+        <span class="brand-emoji">🤖</span>
+        <span class="brand-text">AgentAICoach</span>
+    </div>
+    <div class="episode-badge">$47 Entry Session</div>
+
+    <div class="content">
+        <div class="section-badge">Part 1</div>
+        <h1 class="main-title">THE REALITY CHECK</h1>
+        <p class="subtitle">How many leads did you actually follow up with this week?<br>Be honest.</p>
+        <div class="timer">
+            <div class="timer-icon"></div>
+            <span class="timer-text">Session time: <span class="timer-duration">00:00 – 05:00</span></span>
+        </div>
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+</body>
+</html>
