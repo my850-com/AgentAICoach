@@ -296,9 +296,9 @@
             color: "#86efac",
             description: "You're at the beginning of your AI journey. There's tremendous opportunity ahead to transform your business.",
             recommendation: "diy",
-            recommendationTitle: "DIY AI Course",
-            recommendationText: "Our 12-module self-paced course gives you the foundation to start using AI immediately in your real estate business.",
-            price: "$349"
+            recommendationTitle: "AI Quick Start",
+            recommendationText: "A 35-45 minute on-demand video with actionable AI strategies you can implement immediately.",
+            price: "$47"
         },
         {
             name: "AI Emerging",
@@ -308,9 +308,9 @@
             color: "#67e8f9",
             description: "You've dipped your toes in AI waters. You understand the basics and are ready to apply them systematically.",
             recommendation: "diy",
-            recommendationTitle: "DIY AI Course",
-            recommendationText: "Build practical skills with structured learning, 200+ prompt templates, and real estate-specific use cases.",
-            price: "$349"
+            recommendationTitle: "AI Quick Start",
+            recommendationText: "Get actionable AI strategies fast. 50+ prompt templates and step-by-step implementation guide.",
+            price: "$47"
         },
         {
             name: "AI Active User",
@@ -725,13 +725,14 @@
                 <strong>${category.recommendationTitle} — ${category.price}</strong>
                 <p>${category.recommendationText}</p>
                 <ul style="text-align: left; margin-top: 16px;">
-                    <li>12 self-paced training modules</li>
-                    <li>200+ real estate prompt templates</li>
-                    <li>Private community access</li>
-                    <li>Monthly Q&A recordings</li>
+                    <li>35-45 minute on-demand video</li>
+                    <li>50+ real estate prompt templates</li>
+                    <li>Step-by-step implementation guide</li>
+                    <li>Instant access after purchase</li>
+                    <li>Works on any device, anytime</li>
                 </ul>
                 <p style="margin-top: 16px;">
-                    <a href="consultation.html?service=diy" class="btn btn-primary">Book Free Consultation — $349</a>
+                    <a href="consultation.html?service=diy" class="btn btn-primary">Get Access — $47</a>
                 </p>
                 <p style="font-size: 0.9rem; color: #64748b; margin-top: 8px;">Not sure? Book a free 15-minute call to discuss if this is right for you.</p>
             `;
