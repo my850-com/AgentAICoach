@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scene 7: Matched Leads</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { width: 1920px; height: 1080px; background: #0f172a; font-family: 'Inter', sans-serif; display: flex; color: #fff; overflow: hidden; position: relative; }
+        .branding { position: absolute; top: 60px; left: 80px; font-size: 20px; font-weight: 600; color: #06b6d4; z-index: 10; }
+        .content { width: 100%; padding: 120px 80px; display: flex; flex-direction: column; align-items: center; }
+        .section-tag { font-size: 24px; font-weight: 600; color: #06b6d4; letter-spacing: 4px; margin-bottom: 20px; text-transform: uppercase; }
+        h2 { font-size: 56px; font-weight: 800; margin-bottom: 60px; text-align: center; }
+        .graphic { display: flex; align-items: center; gap: 60px; margin-bottom: 60px; }
+        .box { width: 400px; height: 280px; background: rgba(255,255,255,.05); border: 2px solid rgba(255,255,255,.2); border-radius: 16px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; }
+        .box.buyers { border-color: #06b6d4; background: rgba(6,182,212,.1); }
+        .box.matched { border-color: #22c55e; background: rgba(34,197,94,.1); }
+        .box-icon { font-size: 64px; margin-bottom: 20px; }
+        .box h3 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+        .box p { font-size: 18px; color: rgba(255,255,255,.7); text-align: center; }
+        .arrow { font-size: 80px; color: #06b6d4; }
+        .process { display: flex; align-items: center; gap: 20px; background: rgba(6,182,212,.15); padding: 20px 40px; border-radius: 50px; border: 1px solid rgba(6,182,212,.3); }
+        .process-icon { font-size: 40px; }
+        .process-text { font-size: 24px; font-weight: 600; color: #06b6d4; }
+        .result { background: linear-gradient(135deg, rgba(34,197,94,.2) 0%, rgba(34,197,94,.1) 100%); border: 2px solid #22c55e; border-radius: 16px; padding: 40px 80px; text-align: center; }
+        .result-icon { font-size: 64px; margin-bottom: 16px; }
+        .result h3 { font-size: 32px; font-weight: 700; color: #22c55e; margin-bottom: 12px; }
+        .result p { font-size: 20px; color: rgba(255,255,255,.8); }
+    </style>
+</head>
+<body>
+    <div class="branding">🦞 HOW WE BUILD IT</div>
+    <div class="content">
+        <div class="section-tag">The Result</div>
+        <h2>Buyer Leads Matched with MLS by ChatGPT</h2>
+        <div class="graphic">
+            <div class="box buyers">
+                <div class="box-icon">👥</div>
+                <h3>Buyer Leads CSV</h3>
+                <p>Google Sheets with buyer criteria, budget, location</p>
+            </div>
+            <div class="arrow">➜</div>
+            <div class="process">
+                <span class="process-icon">🤖</span>
+                <span class="process-text">ChatGPT Matching</span>
+            </div>
+            <div class="arrow">➜</div>
+            <div class="box matched">
+                <div class="box-icon">🎯</div>
+                <h3>Matched Leads CSV</h3>
+                <p>Ranked matches ready for dashboard</p>
+            </div>
+        </div>
+        <div class="result">
+            <div class="result-icon">✅</div>
+            <h3>Upload to Dashboard</h3>
+            <p>Matches appear in HQ Buyer Leads section automatically</p>
+        </div>
+    </div>
+</body>
+</html>
