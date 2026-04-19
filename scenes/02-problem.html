@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scene 2: The Problem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { width: 1920px; height: 1080px; background: #0f172a; font-family: 'Inter', sans-serif; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; overflow: hidden; position: relative; }
+        .branding { position: absolute; top: 60px; left: 80px; font-size: 20px; font-weight: 600; color: #06b6d4; }
+        .content { width: 1600px; z-index: 1; }
+        .section-tag { font-size: 24px; font-weight: 600; color: #06b6d4; letter-spacing: 4px; margin-bottom: 30px; text-transform: uppercase; }
+        h2 { font-size: 64px; font-weight: 800; margin-bottom: 60px; }
+        .problems { display: flex; gap: 40px; }
+        .problem-card { flex: 1; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 50px; text-align: center; }
+        .emoji { font-size: 64px; margin-bottom: 24px; }
+        h3 { font-size: 28px; font-weight: 700; margin-bottom: 16px; }
+        p { font-size: 20px; color: rgba(255,255,255,.7); line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <div class="branding">🦞 HOW WE BUILD IT</div>
+    <div class="content">
+        <div class="section-tag">The Problem</div>
+        <h2>You Get Hot Sheets. But Who Buys?</h2>
+        <div class="problems">
+            <div class="problem-card">
+                <div class="emoji">📋</div>
+                <h3>Hot Sheets Arrive</h3>
+                <p>New listings hit your inbox daily. You scan them manually, wondering which buyers might care.</p>
+            </div>
+            <div class="problem-card">
+                <div class="emoji">😕</div>
+                <h3>The Matching Challenge</h3>
+                <p>Matching buyers to properties is mental work — price, location, beds/baths. Easy to miss the right fit.</p>
+            </div>
+            <div class="problem-card">
+                <div class="emoji">⏰</div>
+                <h3>Time You Don't Have</h3>
+                <p>Manual review takes 20+ minutes every morning. That's 100+ hours per year spent on matching.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
