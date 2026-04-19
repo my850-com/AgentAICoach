@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scene 4: Step 2 - ChatGPT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { width: 1920px; height: 1080px; background: #0f172a; font-family: 'Inter', sans-serif; display: flex; color: #fff; overflow: hidden; position: relative; }
+        .branding { position: absolute; top: 60px; left: 80px; font-size: 20px; font-weight: 600; color: #06b6d4; z-index: 10; }
+        .sidebar { width: 400px; background: rgba(6,182,212,.1); border-right: 1px solid rgba(6,182,212,.3); padding: 120px 60px; display: flex; flex-direction: column; justify-content: center; }
+        .step-num { font-size: 120px; font-weight: 900; color: #06b6d4; margin-bottom: 20px; opacity: .3; }
+        .step-label { font-size: 32px; font-weight: 700; color: #06b6d4; margin-bottom: 16px; }
+        .step-title { font-size: 48px; font-weight: 800; line-height: 1.2; }
+        .main { flex: 1; padding: 100px 80px; display: flex; flex-direction: column; justify-content: center; }
+        .instruction { font-size: 28px; color: rgba(255,255,255,.8); margin-bottom: 50px; line-height: 1.6; }
+        .workflow { display: flex; flex-direction: column; gap: 30px; }
+        .step-row { display: flex; align-items: center; gap: 30px; }
+        .step-box { flex: 1; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 30px; display: flex; align-items: center; gap: 20px; }
+        .step-emoji { font-size: 48px; }
+        .step-text { font-size: 22px; font-weight: 600; }
+        .arrow-down { text-align: center; font-size: 40px; color: #06b6d4; margin: 10px 0; }
+        .chatgpt-box { background: linear-gradient(135deg, rgba(16,185,129,.15) 0%, rgba(16,185,129,.05) 100%); border: 2px solid #10b981; border-radius: 16px; padding: 40px; text-align: center; }
+        .chatgpt-emoji { font-size: 80px; margin-bottom: 20px; }
+        .chatgpt-title { font-size: 36px; font-weight: 800; color: #10b981; margin-bottom: 16px; }
+        .chatgpt-desc { font-size: 22px; color: rgba(255,255,255,.8); }
+        .output { background: linear-gradient(135deg, rgba(34,197,94,.2) 0%, rgba(34,197,94,.1) 100%); border: 2px solid #22c55e; border-radius: 12px; padding: 30px; display: flex; align-items: center; justify-content: center; gap: 20px; }
+        .output-emoji { font-size: 48px; }
+        .output-text { font-size: 24px; font-weight: 700; color: #22c55e; }
+        .highlight { color: #06b6d4; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <div class="branding">🦞 HOW WE BUILD IT</div>
+    <div class="sidebar">
+        <div class="step-num">02</div>
+        <div class="step-label">STEP TWO</div>
+        <div class="step-title">Run It In<br>ChatGPT</div>
+    </div>
+    <div class="main">
+        <div class="instruction">Take the prompt + your CSV files to ChatGPT. Let AI do the heavy matching work — <span class="highlight">your cost, not mine</span>.</div>
+        <div class="workflow">
+            <div class="step-row">
+                <div class="step-box">
+                    <span class="step-emoji">📋</span>
+                    <span class="step-text">Copy the matching prompt</span>
+                </div>
+                <div class="step-box">
+                    <span class="step-emoji">📊</span>
+                    <span class="step-text">Paste Buyer CSV</span>
+                </div>
+                <div class="step-box">
+                    <span class="step-emoji">🏠</span>
+                    <span class="step-text">Paste Hot Sheet CSV</span>
+                </div>
+            </div>
+            <div class="arrow-down">⬇</div>
+            <div class="chatgpt-box">
+                <div class="chatgpt-emoji">🤖</div>
+                <div class="chatgpt-title">ChatGPT Does The Work</div>
+                <div class="chatgpt-desc">Matches buyers to properties • Ranks by fit • Exports results</div>
+            </div>
+            <div class="arrow-down">⬇</div>
+            <div class="output">
+                <span class="output-emoji">📄</span>
+                <span class="output-text">Download Match CSV</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
