@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scene 5: Step 3 - Upload</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { width: 1920px; height: 1080px; background: #0f172a; font-family: 'Inter', sans-serif; display: flex; color: #fff; overflow: hidden; position: relative; }
+        .branding { position: absolute; top: 60px; left: 80px; font-size: 20px; font-weight: 600; color: #06b6d4; z-index: 10; }
+        .sidebar { width: 400px; background: rgba(6,182,212,.1); border-right: 1px solid rgba(6,182,212,.3); padding: 120px 60px; display: flex; flex-direction: column; justify-content: center; }
+        .step-num { font-size: 120px; font-weight: 900; color: #06b6d4; margin-bottom: 20px; opacity: .3; }
+        .step-label { font-size: 32px; font-weight: 700; color: #06b6d4; margin-bottom: 16px; }
+        .step-title { font-size: 48px; font-weight: 800; line-height: 1.2; }
+        .main { flex: 1; padding: 100px 80px; display: flex; flex-direction: column; justify-content: center; }
+        .instruction { font-size: 28px; color: rgba(255,255,255,.8); margin-bottom: 50px; line-height: 1.6; }
+        .upload-flow { display: flex; flex-direction: column; gap: 40px; align-items: center; }
+        .file-box { width: 600px; background: rgba(255,255,255,.05); border: 2px dashed rgba(255,255,255,.3); border-radius: 16px; padding: 50px; text-align: center; }
+        .file-icon { font-size: 64px; margin-bottom: 20px; }
+        .file-name { font-size: 24px; font-weight: 600; color: #06b6d4; margin-bottom: 12px; }
+        .file-desc { font-size: 18px; color: rgba(255,255,255,.6); }
+        .arrow { font-size: 50px; color: #06b6d4; }
+        .dashboard-preview { width: 700px; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 2px solid rgba(6,182,212,.3); border-radius: 16px; padding: 40px; }
+        .dash-header { display: flex; align-items: center; gap: 15px; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,.1); }
+        .dash-logo { font-size: 32px; }
+        .dash-title { font-size: 24px; font-weight: 700; color: #06b6d4; }
+        .match-list { display: flex; flex-direction: column; gap: 15px; }
+        .match-item { background: rgba(6,182,212,.1); border-left: 4px solid #06b6d4; padding: 20px; border-radius: 8px; display: flex; align-items: center; gap: 20px; }
+        .match-emoji { font-size: 32px; }
+        .match-info { flex: 1; }
+        .match-name { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+        .match-detail { font-size: 14px; color: rgba(255,255,255,.6); }
+        .match-score { background: #22c55e; color: white; padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 700; }
+        .success { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.1); }
+        .success-icon { font-size: 48px; margin-bottom: 10px; }
+        .success-text { font-size: 20px; font-weight: 600; color: #22c55e; }
+    </style>
+</head>
+<body>
+    <div class="branding">🦞 HOW WE BUILD IT</div>
+    <div class="sidebar">
+        <div class="step-num">03</div>
+        <div class="step-label">STEP THREE</div>
+        <div class="step-title">Upload &<br>Display</div>
+    </div>
+    <div class="main">
+        <div class="instruction">Upload ChatGPT's match CSV to your HQ dashboard. Matched leads appear instantly in the Hot Leads section.</div>
+        <div class="upload-flow">
+            <div class="file-box">
+                <div class="file-icon">📄</div>
+                <div class="file-name">matched_leads_2025-04-19.csv</div>
+                <div class="file-desc">From ChatGPT • Ready to upload</div>
+            </div>
+            <div class="arrow">⬇</div>
+            <div class="dashboard-preview">
+                <div class="dash-header">
+                    <span class="dash-logo">🦞</span>
+                    <span class="dash-title">MY850 HQ Dashboard</span>
+                </div>
+                <div class="match-list">
+                    <div class="match-item">
+                        <span class="match-emoji">👤</span>
+                        <div class="match-info">
+                            <div class="match-name">Sarah M. — Harbor View Condo</div>
+                            <div class="match-detail">$450K budget • 2 bed • Destin</div>
+                        </div>
+                        <span class="match-score">94% Match</span>
+                    </div>
+                    <div class="match-item">
+                        <span class="match-emoji">👤</span>
+                        <div class="match-info">
+                            <div class="match-name">Mike T. — Gulf Shore Drive</div>
+                            <div class="match-detail">$925K budget • 3 bed • Beachfront</div>
+                        </div>
+                        <span class="match-score">87% Match</span>
+                    </div>
+                </div>
+                <div class="success">
+                    <div class="success-icon">✅</div>
+                    <div class="success-text">3 Matches Loaded • Ready to Call</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
