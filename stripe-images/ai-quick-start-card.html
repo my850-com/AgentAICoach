@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            width: 2048px;
+            height: 2048px;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .card {
+            width: 1600px;
+            height: 1800px;
+            background: #ffffff;
+            border: 6px solid #e2e8f0;
+            border-radius: 48px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 80px 60px;
+        }
+        .icon {
+            width: 140px;
+            height: 140px;
+            background: #1e3a5f;
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            margin-bottom: 40px;
+        }
+        .title {
+            font-size: 72px;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .subtitle {
+            font-size: 40px;
+            color: #64748b;
+            margin-bottom: 60px;
+        }
+        .divider {
+            width: 100%;
+            height: 2px;
+            background: #e2e8f0;
+            margin: 40px 0;
+        }
+        .price {
+            font-size: 120px;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 60px;
+        }
+        .features {
+            width: 100%;
+            text-align: left;
+        }
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 32px 0;
+            border-bottom: 2px solid #f1f5f9;
+            font-size: 38px;
+            color: #334155;
+        }
+        .feature:last-child { border-bottom: none; }
+        .check {
+            width: 48px;
+            height: 48px;
+            background: #06b6d4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon">🎥</div>
+        <div class="title">AI Quick Start</div>
+        <div class="subtitle">On-Demand Video</div>
+        <div class="divider"></div>
+        <div class="price">$50</div>
+        <div class="features">
+            <div class="feature"><span class="check">✓</span>35-45 minute on-demand video</div>
+            <div class="feature"><span class="check">✓</span>20+ real estate prompt templates</div>
+            <div class="feature"><span class="check">✓</span>Step-by-step implementation guide</div>
+            <div class="feature"><span class="check">✓</span>Instant access after purchase</div>
+            <div class="feature"><span class="check">✓</span>Works on any device, anytime</div>
+        </div>
+    </div>
+</body>
+</html>

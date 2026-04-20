@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            width: 2048px;
+            height: 2048px;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .card {
+            width: 1600px;
+            height: 1800px;
+            background: #ffffff;
+            border: 6px solid #e2e8f0;
+            border-radius: 48px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 80px 60px;
+        }
+        .icon {
+            width: 140px;
+            height: 140px;
+            background: #1e3a5f;
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            margin-bottom: 40px;
+        }
+        .title {
+            font-size: 64px;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .subtitle {
+            font-size: 40px;
+            color: #64748b;
+            margin-bottom: 60px;
+        }
+        .divider {
+            width: 100%;
+            height: 2px;
+            background: #e2e8f0;
+            margin: 40px 0;
+        }
+        .price {
+            font-size: 96px;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 40px;
+        }
+        .desc {
+            font-size: 36px;
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 0 40px;
+            line-height: 1.5;
+        }
+        .features {
+            width: 100%;
+            text-align: left;
+        }
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 28px 0;
+            border-bottom: 2px solid #f1f5f9;
+            font-size: 36px;
+            color: #334155;
+        }
+        .feature:last-child { border-bottom: none; }
+        .check {
+            width: 48px;
+            height: 48px;
+            background: #06b6d4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+        .price-highlight {
+            color: #06b6d4;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon">⚙️</div>
+        <div class="title">Elite AI Systems</div>
+        <div class="subtitle">Custom Automation Build</div>
+        <div class="divider"></div>
+        <div class="price">Modular</div>
+        <div class="desc">Custom automation builds for your business. Audit + systems designed for top producers and teams ready for transformation.</div>
+        <div class="features">
+            <div class="feature"><span class="check">✓</span>Business AI audit — <span class="price-highlight">$500</span></div>
+            <div class="feature"><span class="check">✓</span>Lead intake automation — <span class="price-highlight">$1,500</span></div>
+            <div class="feature"><span class="check">✓</span>Listing marketing system — <span class="price-highlight">$1,000</span></div>
+            <div class="feature"><span class="check">✓</span>Content automation — <span class="price-highlight">$750</span></div>
+            <div class="feature"><span class="check">✓</span>Custom data systems — <span class="price-highlight">$2,000+</span></div>
+        </div>
+    </div>
+</body>
+</html>

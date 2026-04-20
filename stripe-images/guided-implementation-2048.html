@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            width: 2048px;
+            height: 2048px;
+            background: linear-gradient(135deg, #0f172a 0%, #134e4a 50%, #0d9488 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .card {
+            width: 1800px;
+            height: 1800px;
+            background: rgba(255,255,255,.03);
+            border: 3px solid rgba(34,197,94,.3);
+            border-radius: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 100px;
+            text-align: center;
+            position: relative;
+        }
+        .badge {
+            position: absolute;
+            top: 80px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            padding: 24px 60px;
+            border-radius: 50px;
+            font-size: 40px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            box-shadow: 0 10px 40px rgba(34,197,94,.4);
+        }
+        .icon {
+            font-size: 280px;
+            margin-bottom: 60px;
+            margin-top: 60px;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,.3));
+        }
+        .title {
+            font-size: 120px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+            text-shadow: 0 10px 30px rgba(0,0,0,.3);
+        }
+        .price {
+            font-size: 180px;
+            font-weight: 900;
+            color: #22c55e;
+            margin-bottom: 50px;
+            text-shadow: 0 10px 40px rgba(34,197,94,.4);
+        }
+        .subtitle {
+            font-size: 64px;
+            color: rgba(255,255,255,.8);
+            margin-bottom: 60px;
+            font-weight: 600;
+        }
+        .features {
+            font-size: 52px;
+            color: rgba(255,255,255,.85);
+            line-height: 1.8;
+        }
+        .feature {
+            margin: 16px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        .check { color: #22c55e; font-size: 56px; }
+        .brand {
+            position: absolute;
+            bottom: 80px;
+            font-size: 48px;
+            color: rgba(255,255,255,.4);
+            letter-spacing: 8px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="badge">★ BEST VALUE</div>
+        <div class="icon">🎯</div>
+        <div class="title">GUIDED IMPLEMENTATION</div>
+        <div class="price">$1,299</div>
+        <div class="subtitle">4-Week Live Program</div>
+        <div class="features">
+            <div class="feature"><span class="check">✓</span> 4 weekly live Zoom sessions</div>
+            <div class="feature"><span class="check">✓</span> Custom prompts built for YOU</div>
+            <div class="feature"><span class="check">✓</span> 1-on-1 workflow optimization</div>
+            <div class="feature"><span class="check">✓</span> Dedicated accountability</div>
+        </div>
+        <div class="brand">AGENTAICOACH.COM</div>
+    </div>
+</body>
+</html>

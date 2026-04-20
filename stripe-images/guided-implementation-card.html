@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            width: 2048px;
+            height: 2048px;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .card {
+            width: 1600px;
+            height: 1800px;
+            background: #ffffff;
+            border: 6px solid #06b6d4;
+            border-radius: 48px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 80px 60px;
+            position: relative;
+        }
+        .badge {
+            position: absolute;
+            top: -40px;
+            background: #06b6d4;
+            color: white;
+            padding: 20px 50px;
+            border-radius: 40px;
+            font-size: 32px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+        .icon {
+            width: 140px;
+            height: 140px;
+            background: #1e3a5f;
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        .title {
+            font-size: 64px;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .subtitle {
+            font-size: 40px;
+            color: #64748b;
+            margin-bottom: 60px;
+        }
+        .divider {
+            width: 100%;
+            height: 2px;
+            background: #e2e8f0;
+            margin: 40px 0;
+        }
+        .price {
+            font-size: 120px;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 60px;
+        }
+        .features {
+            width: 100%;
+            text-align: left;
+        }
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 32px 0;
+            border-bottom: 2px solid #f1f5f9;
+            font-size: 38px;
+            color: #334155;
+        }
+        .feature:last-child { border-bottom: none; }
+        .check {
+            width: 48px;
+            height: 48px;
+            background: #06b6d4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="badge">BEST VALUE</div>
+        <div class="icon">🎯</div>
+        <div class="title">Guided Implementation</div>
+        <div class="subtitle">4-Week Program</div>
+        <div class="divider"></div>
+        <div class="price">$1,299</div>
+        <div class="features">
+            <div class="feature"><span class="check">✓</span>4 weekly live sessions (Zoom)</div>
+            <div class="feature"><span class="check">✓</span>Custom prompts for YOUR business</div>
+            <div class="feature"><span class="check">✓</span>1-on-1 workflow optimization</div>
+            <div class="feature"><span class="check">✓</span>DIY course included as reference</div>
+            <div class="feature"><span class="check">✓</span>Dedicated accountability</div>
+        </div>
+    </div>
+</body>
+</html>

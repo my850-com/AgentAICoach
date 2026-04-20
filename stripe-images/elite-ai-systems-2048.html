@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            width: 2048px;
+            height: 2048px;
+            background: linear-gradient(135deg, #0f172a 0%, #312e81 50%, #7c3aed 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .card {
+            width: 1800px;
+            height: 1800px;
+            background: rgba(255,255,255,.03);
+            border: 3px solid rgba(167,139,250,.3);
+            border-radius: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 100px;
+            text-align: center;
+            position: relative;
+        }
+        .icon {
+            font-size: 280px;
+            margin-bottom: 60px;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,.3));
+        }
+        .title {
+            font-size: 130px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+            text-shadow: 0 10px 30px rgba(0,0,0,.3);
+        }
+        .price {
+            font-size: 100px;
+            font-weight: 700;
+            color: #a78bfa;
+            margin-bottom: 30px;
+            letter-spacing: 4px;
+        }
+        .subtitle {
+            font-size: 72px;
+            color: rgba(255,255,255,.8);
+            margin-bottom: 60px;
+            font-weight: 600;
+        }
+        .modules {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        .module {
+            background: rgba(255,255,255,.08);
+            border: 2px solid rgba(167,139,250,.3);
+            border-radius: 30px;
+            padding: 50px 40px;
+            min-width: 380px;
+        }
+        .mod-title { font-size: 40px; color: rgba(255,255,255,.9); margin-bottom: 20px; font-weight: 600; }
+        .mod-price { font-size: 72px; color: #a78bfa; font-weight: 800; }
+        .audit {
+            font-size: 48px;
+            color: rgba(255,255,255,.7);
+            margin-bottom: 40px;
+        }
+        .audit-price { color: #a78bfa; font-weight: 700; }
+        .features {
+            font-size: 44px;
+            color: rgba(255,255,255,.85);
+            line-height: 1.6;
+        }
+        .feature {
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+        .check { color: #a78bfa; font-size: 48px; }
+        .brand {
+            position: absolute;
+            bottom: 80px;
+            font-size: 48px;
+            color: rgba(255,255,255,.4);
+            letter-spacing: 8px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon">⚙️</div>
+        <div class="title">ELITE AI SYSTEMS</div>
+        <div class="price">CUSTOM BUILDS</div>
+        <div class="subtitle">Modular Pricing • Your Systems</div>
+        <div class="audit">Audit: <span class="audit-price">$500</span></div>
+        <div class="modules">
+            <div class="module">
+                <div class="mod-title">Lead Intake</div>
+                <div class="mod-price">$1,500</div>
+            </div>
+            <div class="module">
+                <div class="mod-title">Listings</div>
+                <div class="mod-price">$1,000</div>
+            </div>
+            <div class="module">
+                <div class="mod-title">Content</div>
+                <div class="mod-price">$750</div>
+            </div>
+        </div>
+        <div class="features">
+            <div class="feature"><span class="check">✓</span> Fully custom automation builds</div>
+            <div class="feature"><span class="check">✓</span> Integration with YOUR existing tools</div>
+        </div>
+        <div class="brand">AGENTAICOACH.COM</div>
+    </div>
+</body>
+</html>
