@@ -732,7 +732,10 @@
                     <li>Works on any device, anytime</li>
                 </ul>
                 <p style="margin-top: 16px;">
-                    <a href="consultation.html?service=diy" class="btn btn-primary">Get Access — $47</a>
+                    <stripe-buy-button
+                      buy-button-id="buy_btn_1TOOfs7ih7KlmwwfPwmuDVNF"
+                      publishable-key="pk_live_51SBIHk7ih7KlmwwfiX4rYWd12IyFzNBWfGJ8zkZSxi4YCWsAOohiCT4WYY7EWFNgdHn7KnI9KnefaOPleomuXDI200mFEpkDYr">
+                    </stripe-buy-button>
                 </p>
                 <p style="font-size: 0.9rem; color: #64748b; margin-top: 8px;">Not sure? Book a free 15-minute call to discuss if this is right for you.</p>
             `;
@@ -747,7 +750,10 @@
                     <li>DIY course included as reference</li>
                 </ul>
                 <p style="margin-top: 16px;">
-                    <a href="consultation.html?service=guided" class="btn btn-primary">Book Free Consultation — $1,299</a>
+                    <stripe-buy-button
+                      buy-button-id="buy_btn_1TOOmD7ih7KlmwwfFDDjqCYm"
+                      publishable-key="pk_live_51SBIHk7ih7KlmwwfiX4rYWd12IyFzNBWfGJ8zkZSxi4YCWsAOohiCT4WYY7EWFNgdHn7KnI9KnefaOPleomuXDI200mFEpkDYr">
+                    </stripe-buy-button>
                 </p>
                 <p style="font-size: 0.9rem; color: #64748b; margin-top: 8px;">Book a free 15-minute call to discuss your goals and see if this program fits.</p>
             `;
