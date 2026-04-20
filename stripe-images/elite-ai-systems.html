@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            width: 1200px;
+            height: 800px;
+            background: linear-gradient(135deg, #1a365d 0%, #7c3aed 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        .card {
+            text-align: center;
+            padding: 60px;
+        }
+        .icon {
+            font-size: 120px;
+            margin-bottom: 30px;
+        }
+        .title {
+            font-size: 72px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+        .price {
+            font-size: 72px;
+            font-weight: 900;
+            color: #a78bfa;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            font-size: 32px;
+            color: rgba(255,255,255,.8);
+            margin-bottom: 40px;
+        }
+        .features {
+            font-size: 26px;
+            color: rgba(255,255,255,.9);
+            line-height: 1.6;
+        }
+        .feature {
+            margin: 10px 0;
+        }
+        .modules {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        .module {
+            background: rgba(255,255,255,.1);
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 22px;
+        }
+        .module-price {
+            color: #a78bfa;
+            font-weight: 700;
+            font-size: 28px;
+        }
+        .brand {
+            position: absolute;
+            bottom: 60px;
+            font-size: 24px;
+            color: rgba(255,255,255,.5);
+            letter-spacing: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon">⚙️</div>
+        <div class="title">ELITE AI SYSTEMS</div>
+        <div class="price">MODULAR PRICING</div>
+        <div class="subtitle">Custom Automation Builds</div>
+        <div class="features">
+            <div class="feature">✓ Business AI audit: $500</div>
+        </div>
+        <div class="modules">
+            <div class="module">
+                <div>Lead intake</div>
+                <div class="module-price">$1,500</div>
+            </div>
+            <div class="module">
+                <div>Listing marketing</div>
+                <div class="module-price">$1,000</div>
+            </div>
+            <div class="module">
+                <div>Content automation</div>
+                <div class="module-price">$750</div>
+            </div>
+        </div>
+    </div>
+    <div class="brand">AGENTAICOACH.COM</div>
+</body>
+</html>
