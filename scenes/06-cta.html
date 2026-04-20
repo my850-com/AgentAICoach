@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scene 6: CTA - Three Programs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { width: 1920px; height: 1080px; background: linear-gradient(135deg, #0f172a 0%, #1a365d 100%); font-family: 'Inter', sans-serif; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; overflow: hidden; position: relative; }
+        body::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 80%, rgba(6,182,212,.15) 0%, transparent 50%), radial-gradient(ellipse at 70% 20%, rgba(6,182,212,.1) 0%, transparent 40%); pointer-events: none; }
+        .branding { position: absolute; top: 60px; left: 80px; font-size: 20px; font-weight: 600; color: #06b6d4; z-index: 10; }
+        .content { text-align: center; z-index: 1; max-width: 1400px; padding: 40px; }
+        .series-title { font-size: 32px; font-weight: 600; color: #06b6d4; letter-spacing: 8px; margin-bottom: 30px; text-transform: uppercase; }
+        h2 { font-size: 72px; font-weight: 800; margin-bottom: 60px; background: linear-gradient(135deg, #fff 0%, #06b6d4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .programs { display: flex; gap: 40px; justify-content: center; margin-bottom: 60px; }
+        .program-card { width: 420px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 50px; text-align: center; position: relative; }
+        .program-card.featured { border-color: #06b6d4; background: rgba(6,182,212,.1); transform: scale(1.05); }
+        .badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #06b6d4; color: white; padding: 8px 20px; border-radius: 20px; font-size: 14px; font-weight: 700; text-transform: uppercase; }
+        .program-icon { font-size: 56px; margin-bottom: 24px; }
+        .program-name { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+        .program-price { font-size: 48px; font-weight: 800; color: #06b6d4; margin-bottom: 20px; }
+        .program-desc { font-size: 18px; color: rgba(255,255,255,.7); line-height: 1.5; }
+        .cta-section { background: rgba(6,182,212,.15); border: 2px solid rgba(6,182,212,.3); border-radius: 16px; padding: 50px 100px; margin-top: 20px; }
+        .cta-text { font-size: 36px; font-weight: 700; margin-bottom: 30px; }
+        .cta-buttons { display: flex; gap: 30px; justify-content: center; }
+        .cta-btn { padding: 20px 50px; border-radius: 12px; font-size: 24px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 15px; }
+        .cta-btn.primary { background: linear-gradient(135deg, #06b6d4, #0891b2); color: white; }
+        .cta-btn.secondary { background: transparent; border: 2px solid rgba(255,255,255,.3); color: white; }
+        .emoji { font-size: 32px; }
+    </style>
+</head>
+<body>
+    <div class="branding">🦞 MY850 REAL ESTATE</div>
+    <div class="content">
+        <div class="series-title">How We Build It</div>
+        <h2>Ready to Automate?</h2>
+        <div class="programs">
+            <div class="program-card">
+                <div class="program-icon">🎥</div>
+                <div class="program-name">AI Quick Start</div>
+                <div class="program-price">$47</div>
+                <div class="program-desc">35-45 min video • 50+ prompt templates • Instant access</div>
+            </div>
+            <div class="program-card featured">
+                <div class="badge">Best Value</div>
+                <div class="program-icon">🎯</div>
+                <div class="program-name">Guided Implementation</div>
+                <div class="program-price">$1,299</div>
+                <div class="program-desc">4-week program • Live sessions • Custom prompts</div>
+            </div>
+            <div class="program-card">
+                <div class="program-icon">⚙️</div>
+                <div class="program-name">Elite AI Systems</div>
+                <div class="program-price">Modular</div>
+                <div class="program-desc">Custom builds • Business audit • $500-$2,000 per system</div>
+            </div>
+        </div>
+        <div class="cta-section">
+            <div class="cta-text">🚀 Start Your AI Journey Today</div>
+            <div class="cta-buttons">
+                <a href="https://agentaicoach.com" class="cta-btn primary">
+                    <span class="emoji">🔗</span>
+                    Visit AgentAICoach.com
+                </a>
+                <a href="https://agentaicoach.com/#quiz" class="cta-btn secondary">
+                    <span class="emoji">🧠</span>
+                    Take the AI Quiz
+                </a>
+            </div>
+            <div style="margin-top: 30px; font-size: 20px; color: rgba(255,255,255,.7);">
+                📞 Or try our AI caller: <strong>(850) 909-8585</strong>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
