@@ -875,6 +875,45 @@ section {
 .service-card .btn {
     margin: 0 32px 32px;
     width: calc(100% - 64px);
+    display: block;
+    text-align: center;
+}
+
+/* Center Stripe buttons in service cards */
+.service-card stripe-buy-button {
+    display: block;
+    margin: 0 auto 32px;
+    width: calc(100% - 64px);
+}
+
+/* Stripe button wrapper for centering */
+.stripe-wrapper {
+    display: flex;
+    justify-content: center;
+    width: calc(100% - 64px);
+    margin: 0 32px 32px;
+}
+
+/* Enhanced hover effects */
+.btn-primary {
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(46, 80, 144, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(46, 80, 144, 0.4);
+}
+
+.btn-secondary {
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: var(--gradient-primary);
+    color: white;
+    border-color: transparent;
+    transform: translateY(-2px);
 }
 
 /* ============================================
