@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) - Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6EHR4E803G"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-6EHR4E803G');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thank you for your order - AgentAICoach">
+    <meta property="og:title" content="Thank You - AgentAICoach">
+    <meta property="og:description" content="Your AI journey starts now.">
+    <meta property="og:image" content="https://agentaicoach.com/og-image.jpg">
+    <title>Thank You - AgentAICoach</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='15' fill='%231a365d'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='42' font-weight='bold' fill='white'%3EAI%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .thankyou-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px;
+            background: linear-gradient(135deg, #0f172a 0%, #1a365d 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .thankyou-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 30% 80%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        .thankyou-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+        .success-icon {
+            font-size: 120px;
+            margin-bottom: 40px;
+            display: inline-block;
+            animation: bounce 1s ease;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(0.95); }
+            75% { transform: scale(1.05); }
+        }
+        .thankyou-headline {
+            font-size: 56px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .thankyou-message {
+            font-size: 28px;
+            color: rgba(255,255,255,.85);
+            line-height: 1.6;
+            margin-bottom: 50px;
+        }
+        .thankyou-message strong {
+            color: #06b6d4;
+            font-weight: 700;
+        }
+        .next-steps {
+            background: rgba(255,255,255,.05);
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        .next-steps h3 {
+            font-size: 24px;
+            color: #06b6d4;
+            margin-bottom: 20px;
+        }
+        .next-steps p {
+            font-size: 20px;
+            color: rgba(255,255,255,.7);
+            margin-bottom: 16px;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 40px;
+            background: linear-gradient(135deg, #2E5090, #20C997);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        .btn-home:hover {
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 40px;
+            background: transparent;
+            border: 2px solid rgba(255,255,255,.3);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="brand-icon">🤖</span>
+                <span class="brand-text">AgentAICoach</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Thank You Hero -->
+    <section class="thankyou-hero">
+        <div class="container">
+            <div class="thankyou-content">
+                <div class="success-icon">🎉</div>
+                <h1 class="thankyou-headline">Congratulations!</h1>
+                <p class="thankyou-message">
+                    You are about to move your real estate business into the future.<br><br>
+                    We <strong>show</strong> you, <strong>do it with</strong> you, or <strong>do it for</strong> you.<br>
+                    We'll be in touch soon.
+                </p>
+                <div class="next-steps">
+                    <h3>📧 What's Next?</h3>
+                    <p>✓ Order confirmation sent to your email</p>
+                    <p>✓ Access details arriving within 15 minutes</p>
+                    <p>✓ Our team will reach out within 24 hours</p>
+                </div>
+                <div class="cta-buttons">
+                    <a href="index.html" class="btn-home">
+                        <span>←</span>
+                        <span>Back to Home</span>
+                    </a>
+                    <a href="#quiz" class="btn-secondary">
+                        <span>📞</span>
+                        <span>Try Our AI: (850) 909-8585</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Track purchase completion
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'purchase_complete', {
+                event_category: 'Ecommerce',
+                event_label: 'Order Thank You Page'
+            });
+        }
+    </script>
+</body>
+</html>
