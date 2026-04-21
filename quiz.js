@@ -297,7 +297,7 @@
             description: "You're at the beginning of your AI journey. There's tremendous opportunity ahead to transform your business.",
             recommendation: "diy",
             recommendationTitle: "AI Quick Start",
-            recommendationText: "A 35-45 minute on-demand video with actionable AI strategies you can implement immediately.",
+            recommendationText: "A 30-40 minute video with actionable AI strategies you can implement.",
             price: "$47"
         },
         {
@@ -309,7 +309,7 @@
             description: "You've dipped your toes in AI waters. You understand the basics and are ready to apply them systematically.",
             recommendation: "diy",
             recommendationTitle: "AI Quick Start",
-            recommendationText: "Get actionable AI strategies fast. 50+ prompt templates and step-by-step implementation guide.",
+            recommendationText: "Get actionable AI strategies fast. 12 real world prompts and step-by-step guide.",
             price: "$47"
         },
         {
@@ -725,10 +725,9 @@
                 <strong>${category.recommendationTitle} — ${category.price}</strong>
                 <p>${category.recommendationText}</p>
                 <ul style="text-align: left; margin-top: 16px;">
-                    <li>35-45 minute on-demand video</li>
-                    <li>50+ real estate prompt templates</li>
+                    <li>30-40 minute video</li>
+                    <li>12 real world real estate prompts</li>
                     <li>Step-by-step implementation guide</li>
-                    <li>Instant access after purchase</li>
                     <li>Works on any device, anytime</li>
                 </ul>
                 <p style="margin-top: 16px;">
