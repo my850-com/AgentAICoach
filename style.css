@@ -1957,3 +1957,44 @@ section {
         page-break-inside: avoid;
     }
 }
+
+
+/* ============================================
+CONSULTING SECTION (Real Estate AI Consulting + Get More Info)
+============================================ */
+.consulting-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+  align-items: start;
+}
+
+.consulting-info p {
+  color: var(--text-light);
+  font-size: 1.05rem;
+  margin-bottom: 20px;
+}
+
+.consulting-form-card {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  padding: 40px;
+}
+
+.consulting-form-card h3 {
+  margin-bottom: 8px;
+}
+
+.consulting-form-card > p {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+
+.consulting-form-card .form-group textarea {
+  width: 100%;
+  resize: vertical;
+  font-family: inherit;
+}
